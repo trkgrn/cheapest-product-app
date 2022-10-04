@@ -1,0 +1,90 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="grid justify-content-center p-2 lg:p-0" style="min-width:80%">
+    <div class="col-12 xl:col-6"
+         style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, rgb(0,126,92) 10%, rgba(33, 150, 243, 0) 100%);">
+      <div class="h-full w-full m-0 py-7 px-4"
+           style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
+        <div class="text-center mb-5">
+          <div class="text-900 text-3xl font-medium mb-3">Hoşgeldiniz!</div>
+          <span class="text-600 font-medium">Daha önce kayıt olmadıysanız kayıt olunuz..</span>
+        </div>
+
+        <div [formGroup]="form" class="md:w-10 mx-auto">
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="name" pInputText formControlName="name"
+                       [required]="true">
+                <label for="name">Ad-Soyad</label>
+            </span>
+          </div>
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-at"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="username" pInputText formControlName="username"
+                       [required]="true">
+                <label for="username">Kullanıcı Adı</label>
+            </span>
+          </div>
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-envelope"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="mail" pInputText formControlName="mail"
+                       [required]="true">
+                <label for="mail">E-Mail Adresi</label>
+            </span>
+          </div>
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-phone"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="tel" pInputText formControlName="telNumber"
+                       [required]="true">
+                <label for="tel">Telefon Numarası</label>
+            </span>
+          </div>
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-key"></i>
+            </span>
+            <span class="p-float-label">
+              <p-password id="password" [toggleMask]="true"
+                          formControlName="password" styleClass="w-full p-password p-input-icon-right"
+                          [required]="true"></p-password>
+              <label for="password">Şifre</label>
+          </span>
+          </div>
+
+          <div class="p-inputgroup w-full mb-5">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-image"></i>
+            </span>
+            <input type="file" id="image" pInputText formControlName="image"
+                    accept="image/png, image/jpeg" (change)="change($event)">
+          </div>
+
+          <div class="flex align-items-center justify-content-between mb-5">
+            <a class="font-medium no-underline ml-2 text-right cursor-pointer" href="/login"
+               style="color: #007e5c">Giriş Yap</a>
+          </div>
+          <button pButton pRipple label="Kayıt Ol" class="w-full p-3 text-xl" style="background:#007e5c"
+                  (click)="register()" [disabled]="form.invalid"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
