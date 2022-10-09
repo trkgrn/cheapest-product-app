@@ -18,4 +18,16 @@ public class ProductService {
     public List<Product> saveAll(List<Product> products){
         return this.productRepository.saveAll(products);
     }
+
+    public List<String> getProductCodesByBrand(String brand)  {
+    return this.productRepository.getProductCodesByBrand(brand);
+    }
+
+    public Long getProductIdByProductCode(String productCode){
+        return this.productRepository.getProductIdByProductCode(productCode);
+    }
+
+    public List<String> getAllBrandName(){
+        return this.productRepository.getAllBrandName();
+    }
 }

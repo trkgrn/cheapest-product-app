@@ -4,7 +4,7 @@ package com.trkgrn_theomer.cheapspring.api.interceptor;
 import com.trkgrn_theomer.cheapspring.api.exception.ExpiredJwtExc;
 import com.trkgrn_theomer.cheapspring.api.exception.NullPointerExc;
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Token;
-import com.trkgrn_theomer.cheapspring.api.service.concretes.TokenService;
+import com.trkgrn_theomer.cheapspring.api.service.TokenService;
 import com.trkgrn_theomer.cheapspring.api.service.userdetail.CustomUserDetails;
 import com.trkgrn_theomer.cheapspring.api.service.userdetail.UserDetailService;
 import com.trkgrn_theomer.cheapspring.config.jwt.service.JwtUtil;

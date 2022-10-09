@@ -1,4 +1,4 @@
-package com.trkgrn_theomer.cheapspring.api.service.concretes;
+package com.trkgrn_theomer.cheapspring.api.service;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.ProductWithStore;
 import com.trkgrn_theomer.cheapspring.api.repository.ProductWithStoreRepository;

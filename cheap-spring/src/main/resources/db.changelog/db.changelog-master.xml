@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="store_creator" author="trkgrn">
+        <insert tableName="store">
+            <column name="store_id" value="1"></column>
+            <column name="store_name" value="N11"></column>
+            <column name="store_logo" value="https://cdn.cimri.io/pictures/merchant-logos/7000.png?v=1"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="2"></column>
+            <column name="store_name" value="Vatan"></column>
+            <column name="store_logo" value="https://www.vatanbilgisayar.com/assets/dist/images/vatanlogo.svg"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="3"></column>
+            <column name="store_name" value="Teknosa"></column>
+            <column name="store_logo" value="https://img-teknosa-sap.mncdn.com/_ui/responsive/theme-teknosa/assets/images/logo.svg"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="4"></column>
+            <column name="store_name" value="Trendyol"></column>
+            <column name="store_logo" value="https://cdn.cimri.io/static-component/component_szksJ2022-07-29..png"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="5"></column>
+            <column name="store_name" value="pazarama"></column>
+            <column name="store_logo" value="https://cdn.cimri.io/static-component/component_jArpo2022-07-29..png"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="6"></column>
+            <column name="store_name" value="PttAVM"></column>
+            <column name="store_logo" value="https://cdn.cimri.io/static-component/component_9QM2e2022-07-29..png"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

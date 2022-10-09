@@ -1,7 +1,7 @@
 package com.trkgrn_theomer.cheapspring.api.controller;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Image;
-import com.trkgrn_theomer.cheapspring.api.service.concretes.ImageService;
+import com.trkgrn_theomer.cheapspring.api.service.ImageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

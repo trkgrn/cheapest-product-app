@@ -2,8 +2,8 @@ package com.trkgrn_theomer.cheapspring.api.controller;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.User;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.UserDto;
-import com.trkgrn_theomer.cheapspring.api.service.concretes.ImageService;
-import com.trkgrn_theomer.cheapspring.api.service.concretes.UserService;
+import com.trkgrn_theomer.cheapspring.api.service.ImageService;
+import com.trkgrn_theomer.cheapspring.api.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
