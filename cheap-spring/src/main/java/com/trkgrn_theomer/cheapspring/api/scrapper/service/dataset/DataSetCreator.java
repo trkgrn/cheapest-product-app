@@ -27,7 +27,7 @@ public class DataSetCreator {
     }
 
     public List<Product> creator() throws IOException {
-        List<Product> products = IntStream.range(17, 20).parallel().mapToObj(count -> {
+        List<Product> products = IntStream.range(1, 20).parallel().mapToObj(count -> {
             try {
                 return getProducts(count);
             } catch (IOException e) {
@@ -35,9 +35,9 @@ public class DataSetCreator {
                 throw new RuntimeException();
             }
         }).flatMap(List::stream).collect(Collectors.toList());
-        List<Product> savedProducts = this.productService.saveAll(products);
-        System.out.println(savedProducts);
-        return savedProducts;
+      //  List<Product> savedProducts = this.productService.saveAll(products);
+        System.out.println(products);
+        return products;
     }
 
     private List<Product> getProducts(int page) throws IOException {

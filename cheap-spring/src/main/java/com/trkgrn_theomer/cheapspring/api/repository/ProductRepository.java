@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
+    @Query(value = "SELECT p.productCode  FROM Product p")
+    public List<String> getProductCodes();
+
     @Query(value = "SELECT distinct p.productCode  FROM Product p WHERE p.productBrand=:#{#brandName.toUpperCase()}")
     public List<String> getProductCodesByBrand(String brandName);
 

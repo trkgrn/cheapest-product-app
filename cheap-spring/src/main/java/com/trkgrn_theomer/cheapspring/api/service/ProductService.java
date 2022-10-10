@@ -19,6 +19,10 @@ public class ProductService {
         return this.productRepository.saveAll(products);
     }
 
+    public List<String> getProductCodes()  {
+        return this.productRepository.getProductCodes();
+    }
+
     public List<String> getProductCodesByBrand(String brand)  {
     return this.productRepository.getProductCodesByBrand(brand);
     }

@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws IOException {
@@ -26,11 +28,22 @@ public class Test {
 //            System.out.println("---------------------------------------------------------------------");
 //        }
         //System.out.println(body.html());
-        String a = "15.999,99";
-        String temp = a.replace(".","")
-                        .replace(",",".");
-        double x = Double.parseDouble(temp);
-        System.out.println(x);
+//        String a = "15.999,99";
+//        String temp = a.replace(".","")
+//                        .replace(",",".");
+//        double x = Double.parseDouble(temp);
+//        System.out.println(x);
 
+        List<String> fruits = new ArrayList<>();
+        fruits.add("mango");
+        fruits.add("apple");
+        fruits.add("pineapple");
+        fruits.add("orange");
+
+        for (String s:fruits) {
+            if(s.equals("apple"))
+                break;
+            System.out.println(s);
+        }
     }
 }
