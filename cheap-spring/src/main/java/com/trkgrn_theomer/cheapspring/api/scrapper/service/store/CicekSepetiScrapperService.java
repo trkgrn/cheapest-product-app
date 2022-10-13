@@ -18,22 +18,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class TeknosaScrapperService {
-    private static final String filterURL = "https://www.teknosa.com/laptop-notebook-c-116004?s=%3Arelevance";
-    private static final String baseURL = "https://www.teknosa.com";
-    private static final String pageExtension = "&page=";
-    private static final Store teknosa = new Store(3L, null, null);
+public class CicekSepetiScrapperService {
+    private static final String baseURL = "https://www.ciceksepeti.com";
+    private static final String filterURL = "https://www.ciceksepeti.com/dizustu-bilgisayar-laptop?page=";
+    private static final Store ciceksepeti = new Store(9L, null, null);
 
     private static int total=0;
     private final ProductService productService;
-    public TeknosaScrapperService(ProductService productService) {
+    public CicekSepetiScrapperService(ProductService productService) {
         this.productService = productService;
     }
 
     public List<ProductWithStore> scrape(){
         List<String> productCodes = this.productService.getProductCodes();
 
-        List<ProductWithStore> productWithStoreList = IntStream.range(0,61).parallel()
+        List<ProductWithStore> productWithStoreList = IntStream.range(1,105).parallel()
                 .mapToObj(page -> {
                     try {
                         return getProductWithStoreByPage(page,productCodes);
@@ -48,9 +47,9 @@ public class TeknosaScrapperService {
 
     public List<ProductWithStore> getProductWithStoreByPage(int page,List<String> productCodes) throws IOException {
         List<ProductWithStore> products = new ArrayList<>();
-        Document doc = Jsoup.connect(filterURL+pageExtension +page).get();
-        Elements body = doc.select("div.products");
-        for (Element e:body.select("div.prd")) {
+        Document doc = Jsoup.connect(filterURL+page).timeout(0).get();
+        Elements body = doc.select("div.js-ajax-category-products");
+        for (Element e:body.select("div.products__item")) {
             products.add(getProductWithStore(e,productCodes,page));
         }
         return products;
@@ -58,25 +57,47 @@ public class TeknosaScrapperService {
 
     public ProductWithStore getProductWithStore(Element e, List<String> productCodes,int page){
         Product product = new Product();
-
-        String title = e.attr("data-product-name");
-        String price = e.attr("data-product-discounted-price");
-        String productUrl = baseURL + e.attr("data-product-url");
-        Double priceDbl = Double.parseDouble(price);
-      //  Double scoreDbl = Double.parseDouble(score);
+        Element a = e.selectFirst("div.products__item-inner > div.products__container-background > a.products__item-link");
+        String title = a.select("div.products__item-info > div.products__item-details > p.products__item-title").text();
+        String price = a.select("div.products__item-info > div.products__item-details > div.products__item-price > div.price.price--now > div.price__left > span").text();
+        String productUrl = baseURL + a.attr("href");
+        Double priceDbl = Double.parseDouble(price.replace(".", ""));
         for (String productCode:productCodes) {
             if (title.contains(productCode)){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
                 total++;
+                double score = getScore(a);
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+productCode);
                 System.out.println("Title: "+title);
                 System.out.println("Price: "+priceDbl);
-                System.out.println("URL: "+ productUrl);
-                System.out.println("Page: "+ page);
-                return new ProductWithStore(0L,product,teknosa,priceDbl,productUrl);
+                System.out.println("URL: "+productUrl);
+                System.out.println("Page: "+page);
+                System.out.println("PUAN: "+ score);
+
+                return new ProductWithStore(0L,product,ciceksepeti,priceDbl,productUrl);
             }
         }
         return null;
     }
+
+    private double getScore(Element a){
+        Element star = a.selectFirst("div.products__item-info > div.products__item-details > div.products-stars.js-products-stars > div.products-stars__dropdown-evaluation");
+        double score = 0.0;
+        if (star != null) {
+            for (Element s: star.select("div.products-stars__icon-wrapper")) {
+                if (s.html().contains("is-passive")) {
+                    if (s.html().contains("products-stars__icon.icon-half")){
+                        score = score + 0.5;
+                    }
+                    continue;
+                }
+                else if (s.html().contains("\"icon-star-fill products-stars__icon\"")) {
+                    score = score + 1.0;
+                }
+            }
+        }
+        return score;
+    }
+
 }

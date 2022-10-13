@@ -18,22 +18,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class TeknosaScrapperService {
-    private static final String filterURL = "https://www.teknosa.com/laptop-notebook-c-116004?s=%3Arelevance";
-    private static final String baseURL = "https://www.teknosa.com";
-    private static final String pageExtension = "&page=";
-    private static final Store teknosa = new Store(3L, null, null);
-
+public class TeknoraksScrapperService {
+    private static final String filterURL = "https://www.teknoraks.com.tr/kategori/dizustu-bilgisayar?stoktakiler=1&tp=";
+    private static final String baseURL = "https://www.teknoraks.com.tr";
+    private static final Store teknoraks = new Store(8L, null, null);
     private static int total=0;
     private final ProductService productService;
-    public TeknosaScrapperService(ProductService productService) {
+    public TeknoraksScrapperService(ProductService productService) {
         this.productService = productService;
     }
 
     public List<ProductWithStore> scrape(){
         List<String> productCodes = this.productService.getProductCodes();
 
-        List<ProductWithStore> productWithStoreList = IntStream.range(0,61).parallel()
+        List<ProductWithStore> productWithStoreList = IntStream.range(1,27).parallel()
                 .mapToObj(page -> {
                     try {
                         return getProductWithStoreByPage(page,productCodes);
@@ -48,9 +46,9 @@ public class TeknosaScrapperService {
 
     public List<ProductWithStore> getProductWithStoreByPage(int page,List<String> productCodes) throws IOException {
         List<ProductWithStore> products = new ArrayList<>();
-        Document doc = Jsoup.connect(filterURL+pageExtension +page).get();
-        Elements body = doc.select("div.products");
-        for (Element e:body.select("div.prd")) {
+        Document doc = Jsoup.connect(filterURL+page).get();
+        Elements body = doc.select("div.showcase-container > div.row");
+        for (Element e:body.select("div.col-6")) {
             products.add(getProductWithStore(e,productCodes,page));
         }
         return products;
@@ -58,12 +56,12 @@ public class TeknosaScrapperService {
 
     public ProductWithStore getProductWithStore(Element e, List<String> productCodes,int page){
         Product product = new Product();
-
-        String title = e.attr("data-product-name");
-        String price = e.attr("data-product-discounted-price");
-        String productUrl = baseURL + e.attr("data-product-url");
-        Double priceDbl = Double.parseDouble(price);
-      //  Double scoreDbl = Double.parseDouble(score);
+        String title = e.select("div.showcase > div.showcase-inner > div.showcase-content > div.showcase-title > a").attr("title");
+        String price = e.select("div.showcase > div.showcase-inner > div.showcase-content > div.showcase-price > div").text();
+        String productUrl = baseURL + e.select("div.showcase > div.showcase-inner > div.showcase-content > div.showcase-title > a").attr("href");
+        Double priceDbl = Double.parseDouble(price.replace(".", "")
+                .replace(",", ".")
+                .replace(" TL", ""));
         for (String productCode:productCodes) {
             if (title.contains(productCode)){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
@@ -71,10 +69,10 @@ public class TeknosaScrapperService {
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+productCode);
                 System.out.println("Title: "+title);
-                System.out.println("Price: "+priceDbl);
-                System.out.println("URL: "+ productUrl);
-                System.out.println("Page: "+ page);
-                return new ProductWithStore(0L,product,teknosa,priceDbl,productUrl);
+                System.out.println("Price: "+price);
+                System.out.println("URL: "+productUrl);
+                System.out.println("Page: "+page);
+                return new ProductWithStore(0L,product,teknoraks,priceDbl,productUrl);
             }
         }
         return null;

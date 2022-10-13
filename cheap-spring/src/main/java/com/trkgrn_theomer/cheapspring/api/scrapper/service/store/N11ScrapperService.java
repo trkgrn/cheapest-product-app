@@ -25,7 +25,7 @@ public class N11ScrapperService {
     private static final String sortedExtension = "&srt=PRICE_LOW";
     private static final String userAgents = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36";
     private static final Store n11 = new Store(1L,null,null);
-
+    private static int total =0;
     private final ProductService productService;
 
     public N11ScrapperService(ProductService productService) {
@@ -81,7 +81,7 @@ public class N11ScrapperService {
         Product product = new Product();
         String searchURL = url + productCode.replace(" ","");
     //    System.out.println(searchURL);
-        Document doc = Jsoup.connect(searchURL).timeout(0).ignoreHttpErrors(true).get();
+        Document doc = Jsoup.connect(searchURL).timeout(0).get();
         String control = doc.select("div.noResultHolders > span.title").text();
         if(control.equals("Aradığını bulamadık.")){
             System.out.println("Aradığını bulamadık. Ürün Kodu: "+productCode);
@@ -93,23 +93,33 @@ public class N11ScrapperService {
             String productURL = e.select("div.columnContent > div.pro > a").attr("href");
             String title = e.select("div.columnContent > div.pro > a > h3").text();
             String price = e.select("div.columnContent > div.pro > div.proDetail > div.priceContainer > div > span.newPrice.cPoint.priceEventClick > ins").text();
+            Double score = getScore(e);
             Double priceDbl = Double.parseDouble(price.replace(".","")
                     .replace(",",".")
                     .replace(" TL",""));
             if (title.contains(productCode)){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
-                System.out.println(title);
-                System.out.println(price);
-                System.out.println(productURL);
-                System.out.println();
                 total++;
-                return new ProductWithStore(total,product,n11,priceDbl,productURL);
+                System.out.println(total + "------------------------------------");
+                System.out.println("Product Code: " + productCode);
+                System.out.println("Title: " + title);
+                System.out.println("Price: " + priceDbl);
+                System.out.println("URL: " + productURL);
+                System.out.println("PUAN: " + score);
+
+                return new ProductWithStore(null,product,n11,priceDbl,productURL);
             }
         }
 
         return null;
     }
-    private static Long total =0L;
+    private double getScore (Element e){
+        String s = e.select("div.columnContent > div.pro > div.proDetail > div.ratingCont").html();
+        String star = s.substring(s.indexOf("rating") +7,s.indexOf("\">")).replace("r","");
+        Double score = Double.parseDouble(star) / 20.0;
+        return score;
+    }
+
 
     public String getBrandURL(String brand) throws IOException {
         Document doc = Jsoup.connect(baseURL).timeout(0).get();

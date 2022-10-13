@@ -18,22 +18,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class TeknosaScrapperService {
-    private static final String filterURL = "https://www.teknosa.com/laptop-notebook-c-116004?s=%3Arelevance";
-    private static final String baseURL = "https://www.teknosa.com";
+public class PTTAvmScrapperService {
+    private static final String filterURL = "https://www.pttavm.com/arama/dizustu-bilgisayar?limit=60&order=price_asc&min_price=3000";
+    private static final String baseURL = "https://www.pttavm.com";
     private static final String pageExtension = "&page=";
-    private static final Store teknosa = new Store(3L, null, null);
-
+    private static final Store ptt = new Store(6L, null, null);
     private static int total=0;
     private final ProductService productService;
-    public TeknosaScrapperService(ProductService productService) {
+    public PTTAvmScrapperService(ProductService productService) {
         this.productService = productService;
     }
 
     public List<ProductWithStore> scrape(){
         List<String> productCodes = this.productService.getProductCodes();
 
-        List<ProductWithStore> productWithStoreList = IntStream.range(0,61).parallel()
+        List<ProductWithStore> productWithStoreList = IntStream.range(1,143).parallel()
                 .mapToObj(page -> {
                     try {
                         return getProductWithStoreByPage(page,productCodes);
@@ -48,9 +47,10 @@ public class TeknosaScrapperService {
 
     public List<ProductWithStore> getProductWithStoreByPage(int page,List<String> productCodes) throws IOException {
         List<ProductWithStore> products = new ArrayList<>();
-        Document doc = Jsoup.connect(filterURL+pageExtension +page).get();
-        Elements body = doc.select("div.products");
-        for (Element e:body.select("div.prd")) {
+        String searchUrl = page==1 ? new String(filterURL) : new String(filterURL+pageExtension+page);
+        Document doc = Jsoup.connect(searchUrl).get();
+        Elements body = doc.select("div.flex.flex-row.flex-wrap");
+        for (Element e:body.select("div.product-list-box")) {
             products.add(getProductWithStore(e,productCodes,page));
         }
         return products;
@@ -58,12 +58,12 @@ public class TeknosaScrapperService {
 
     public ProductWithStore getProductWithStore(Element e, List<String> productCodes,int page){
         Product product = new Product();
-
-        String title = e.attr("data-product-name");
-        String price = e.attr("data-product-discounted-price");
-        String productUrl = baseURL + e.attr("data-product-url");
-        Double priceDbl = Double.parseDouble(price);
-      //  Double scoreDbl = Double.parseDouble(score);
+        String title = e.select("div > a").attr("title");
+        String price = e.select("div > div.product-list-box-container-info > a > div > div > div.price-box-price").text();
+        String productUrl = baseURL + e.select("div > a").attr("href");
+        Double priceDbl = Double.parseDouble(price.replace(".", "")
+                .replace(",", ".")
+                .replace(" TL", ""));
         for (String productCode:productCodes) {
             if (title.contains(productCode)){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
@@ -71,10 +71,10 @@ public class TeknosaScrapperService {
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+productCode);
                 System.out.println("Title: "+title);
-                System.out.println("Price: "+priceDbl);
-                System.out.println("URL: "+ productUrl);
-                System.out.println("Page: "+ page);
-                return new ProductWithStore(0L,product,teknosa,priceDbl,productUrl);
+                System.out.println("Price: "+price);
+                System.out.println("URL: "+productUrl);
+                System.out.println("Page: "+page);
+                return new ProductWithStore(0L,product,ptt,priceDbl,productUrl);
             }
         }
         return null;

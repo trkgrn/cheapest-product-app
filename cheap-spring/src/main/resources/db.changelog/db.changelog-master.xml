@@ -37,5 +37,25 @@
             <column name="store_name" value="PttAVM"></column>
             <column name="store_logo" value="https://cdn.cimri.io/static-component/component_9QM2e2022-07-29..png"></column>
         </insert>
+        <insert tableName="store">
+            <column name="store_id" value="7"></column>
+            <column name="store_name" value="InceHesap"></column>
+            <column name="store_logo" value="https://turnuva.incehesap.com/wp-content/uploads/2021/10/7a52155dee63e326998a0ac14ed3d7b4.png"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="8"></column>
+            <column name="store_name" value="Teknoraks"></column>
+            <column name="store_logo" value="https://st.myideasoft.com/idea/hy/24/themes/selftpl_6312f19b96b35/assets/uploads/logo.png?revision=1665470683"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="9"></column>
+            <column name="store_name" value="çiçeksepeti"></column>
+            <column name="store_logo" value="https://st.myideasoft.com/idea/hy/24/themes/selftpl_6312f19b96b35/assets/uploads/logo.png?revision=1665470683"></column>
+        </insert>
+        <insert tableName="store">
+            <column name="store_id" value="10"></column>
+            <column name="store_name" value="teknolojipazar"></column>
+            <column name="store_logo" value="https://www.teknolojipazar.com/Data/EditorFiles/tp-logo-new.png"></column>
+        </insert>
     </changeSet>
 </databaseChangeLog>
