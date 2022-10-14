@@ -50,7 +50,7 @@
         <insert tableName="store">
             <column name="store_id" value="9"></column>
             <column name="store_name" value="çiçeksepeti"></column>
-            <column name="store_logo" value="https://st.myideasoft.com/idea/hy/24/themes/selftpl_6312f19b96b35/assets/uploads/logo.png?revision=1665470683"></column>
+            <column name="store_logo" value="https://cdn03.ciceksepeti.com/Themes/Ciceksepeti/Assets/images/ciceksepeti-logo-146.png?v=3.1.1.46926"></column>
         </insert>
         <insert tableName="store">
             <column name="store_id" value="10"></column>

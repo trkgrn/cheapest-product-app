@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductWithStoreRepository extends JpaRepository<ProductWithStore,Long> {
 
@@ -14,4 +16,6 @@ public interface ProductWithStoreRepository extends JpaRepository<ProductWithSto
             " WHERE product_id=:#{#productId} AND store_id=:#{#storeId}" +
             " limit 1")
     public ProductWithStore control(Long storeId,Long productId);
+
+    public List<ProductWithStore> getByProduct_ProductIdOrderByPrice(Long productId);
 }

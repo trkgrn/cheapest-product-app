@@ -22,4 +22,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "SELECT distinct p.productBrand  FROM Product p")
     public List<String> getAllBrandName();
 
+
 }

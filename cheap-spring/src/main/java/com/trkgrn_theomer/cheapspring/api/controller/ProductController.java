@@ -1,33 +1,64 @@
 package com.trkgrn_theomer.cheapspring.api.controller;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
-import com.trkgrn_theomer.cheapspring.api.scrapper.service.dataset.DataSetCreator;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.ProductWithStoreDto;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.ResponseDto;
 import com.trkgrn_theomer.cheapspring.api.service.ProductService;
+import com.trkgrn_theomer.cheapspring.api.service.ProductWithStoreService;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("product")
 public class ProductController {
 
     private final ProductService productService;
-    private final DataSetCreator dataSetCreator;
+    private final ModelMapper modelMapper;
+    private final ProductWithStoreService productWithStoreService;
 
-    public ProductController(ProductService productService, DataSetCreator dataSetCreator) {
+    public ProductController(ProductService productService, ModelMapper modelMapper, ProductWithStoreService productWithStoreService) {
         this.productService = productService;
-        this.dataSetCreator = dataSetCreator;
+        this.modelMapper = modelMapper;
+        this.productWithStoreService = productWithStoreService;
     }
 
-    @GetMapping("dataset-create")
-    public List<Product> dataSetCreate() throws IOException {
-        return this.dataSetCreator.creator();
-    }
-
-    @GetMapping("getProductCodesByBrand")
-    public List<String> getProductCodesByBrand(@RequestParam String brand)  {
+    @GetMapping("/getProductCodesByBrand")
+    public List<String> getProductCodesByBrand(@RequestParam String brand) {
         return this.productService.getProductCodesByBrand(brand);
     }
+
+    @GetMapping("/getAll")
+    public List<Product> getAllProduct() {
+        return this.productService.getAllProduct();
+    }
+
+    @GetMapping("/count")
+    public Long getProductCount() {
+        return this.productService.getProductCount();
+    }
+
+    @GetMapping("/getAllByPage")
+    public List<ResponseDto> getAllProductByPage(@RequestParam int pageNo,
+                                                 @RequestParam int pageSize) {
+        List<Product> products = this.productService.getAllProductByPage(pageNo, pageSize);
+        List<ResponseDto> response = new ArrayList<>();
+        products.stream().map(product -> {
+            ResponseDto res = new ResponseDto();
+            res.setProduct(product);
+            res.setStoreList(this.productWithStoreService.getByProductId(product.getProductId()).stream().map(productWithStore -> {
+                return modelMapper.map(productWithStore, ProductWithStoreDto.class);
+            }).collect(Collectors.toList()));
+            response.add(res);
+            return product;
+        }).collect(Collectors.toList());
+        return response;
+    }
+
 }

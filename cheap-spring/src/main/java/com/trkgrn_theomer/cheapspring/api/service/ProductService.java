@@ -2,6 +2,8 @@ package com.trkgrn_theomer.cheapspring.api.service;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
 import com.trkgrn_theomer.cheapspring.api.repository.ProductRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,18 @@ public class ProductService {
 
     public List<Product> saveAll(List<Product> products){
         return this.productRepository.saveAll(products);
+    }
+
+    public List<Product> getAllProduct(){
+        return this.productRepository.findAll();
+    }
+
+    public List<Product> getAllProductByPage(int pageNo,int pageSize){
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        return this.productRepository.findAll(pageable).getContent();
+    }
+    public Long getProductCount(){
+        return this.productRepository.count();
     }
 
     public List<String> getProductCodes()  {
