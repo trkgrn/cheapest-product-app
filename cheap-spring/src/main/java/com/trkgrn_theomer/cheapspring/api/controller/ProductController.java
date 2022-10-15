@@ -1,6 +1,7 @@
 package com.trkgrn_theomer.cheapspring.api.controller;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterElementsDto;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.ProductWithStoreDto;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.ResponseDto;
 import com.trkgrn_theomer.cheapspring.api.service.ProductService;
@@ -59,6 +60,11 @@ public class ProductController {
             return product;
         }).collect(Collectors.toList());
         return response;
+    }
+
+    @GetMapping("/getFilterElements")
+    public FilterElementsDto getFilterElements(){
+        return this.productService.getFilterElements();
     }
 
 }

@@ -22,5 +22,30 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "SELECT distinct p.productBrand  FROM Product p")
     public List<String> getAllBrandName();
 
+    @Query(value = "SELECT distinct p.usageType  FROM Product p")
+    public List<String> getAllUsageType();
+
+    @Query(value = "SELECT distinct p.color  FROM Product p")
+    public List<String> getAllColor();
+
+    @Query(value = "SELECT distinct p.operatingSystem  FROM Product p")
+    public List<String> getAllOperatingSystem();
+
+    @Query(value = "SELECT distinct p.GPU  FROM Product p")
+    public List<String> getAllGPU();
+
+    @Query(value = "SELECT distinct p.HDD  FROM Product p")
+    public List<String> getAllHDD();
+
+    @Query(value = "SELECT distinct p.RAM  FROM Product p")
+    public List<String> getAllRAM();
+
+    @Query(value = "SELECT distinct p.screenSize  FROM Product p")
+    public List<String> getAllScreenSize();
+
+    @Query(value = "SELECT distinct p.CPU  FROM Product p")
+    public List<String> getAllCPU();
+
+
 
 }

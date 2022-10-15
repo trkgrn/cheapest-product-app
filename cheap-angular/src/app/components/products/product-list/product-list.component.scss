@@ -1,4 +1,13 @@
 :host ::ng-deep {
+  .p-listbox{
+    margin-bottom: 10px;
+  }
+  .p-listbox-filter-container{
+    .p-listbox-filter{
+      height: 30px;
+    }
+  }
+
   .p-dropdown {
     width: 14rem;
     font-weight: normal;
@@ -42,13 +51,14 @@
 
     .product-with-store{
       margin: 2rem 0;
+      padding-left: 0;
       width: 100%;
       img{
         vertical-align: middle;
         border: 0;
         display: inline-block;
         width: auto;
-        height: 18px;
+        height: 16px;
       }
       li{
         list-style-type: none;
@@ -80,7 +90,7 @@
         box-sizing: border-box;
         display: inline-block;
         text-align: center;
-        width: 85%;
+        width: 100%;
         float: none;
         margin-top: 7px!important;
         padding: 0;

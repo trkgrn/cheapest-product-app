@@ -1,6 +1,7 @@
 package com.trkgrn_theomer.cheapspring.api.service;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterElementsDto;
 import com.trkgrn_theomer.cheapspring.api.repository.ProductRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,5 +48,17 @@ public class ProductService {
 
     public List<String> getAllBrandName(){
         return this.productRepository.getAllBrandName();
+    }
+
+    public FilterElementsDto getFilterElements(){
+        FilterElementsDto elements = new FilterElementsDto();
+        elements.setBrandNames(this.productRepository.getAllBrandName());
+        elements.setOperatingSystems(this.productRepository.getAllOperatingSystem());
+        elements.setCPUs(this.productRepository.getAllCPU());
+        elements.setGPUs(this.productRepository.getAllGPU());
+        elements.setHDDs(this.productRepository.getAllHDD());
+        elements.setScreenSizes(this.productRepository.getAllScreenSize());
+        elements.setColors(this.productRepository.getAllColor());
+        return elements;
     }
 }

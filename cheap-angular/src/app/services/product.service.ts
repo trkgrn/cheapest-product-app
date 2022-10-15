@@ -16,5 +16,9 @@ export class ProductService {
     return this.httpService.get("product/count");
   }
 
+  getFilterElements(){
+    return this.httpService.get(("product/getFilterElements"));
+  }
+
 
 }

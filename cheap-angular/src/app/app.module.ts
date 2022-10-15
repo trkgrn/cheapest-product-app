@@ -25,6 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
+import {ListboxModule} from "primeng/listbox";
 
 @NgModule({
   declarations: [
@@ -36,25 +37,26 @@ import {RatingModule} from "primeng/rating";
     NavbarComponent,
     ProductListComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    PasswordModule,
-    CheckboxModule,
-    FormsModule,
-    ButtonModule,
-    RippleModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ToastModule,
-    DialogModule,
-    TableModule,
-    PaginatorModule,
-    DataViewModule,
-    RatingModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        PasswordModule,
+        CheckboxModule,
+        FormsModule,
+        ButtonModule,
+        RippleModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ToastModule,
+        DialogModule,
+        TableModule,
+        PaginatorModule,
+        DataViewModule,
+        RatingModule,
+        ListboxModule
+    ],
   providers: [MessageService,HttpService],
   bootstrap: [AppComponent]
 })
