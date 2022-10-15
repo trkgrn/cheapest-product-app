@@ -13,4 +13,5 @@ public class FilterElementsDto {
     private List<String> operatingSystems;
     private List<String> screenSizes;
     private List<String> colors;
+    private List<String> rams;
 }

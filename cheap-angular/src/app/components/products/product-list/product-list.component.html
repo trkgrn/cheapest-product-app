@@ -1,6 +1,6 @@
 <div class="card">
-  <div class="row">
-    <div class="col-md-2">
+  <div class="flex flex-row">
+    <div class=" md:col-2">
       <p-listbox [options]="filterElements.brandNames" [(ngModel)]="selectedFilters.brandName" [metaKeySelection]="false"
                  [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
                  [style]="{'width':'15rem'}" (onChange)="filterChange()">
@@ -34,6 +34,18 @@
         <ng-template let-gpu pTemplate="item">
           <div class="country-item">
             <div>{{gpu}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.rams" [(ngModel)]="selectedFilters.ram" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>RAM</b>
+        </ng-template>
+        <ng-template let-ram pTemplate="item">
+          <div class="country-item">
+            <div>{{ram}}</div>
           </div>
         </ng-template>
       </p-listbox>
@@ -87,11 +99,12 @@
         </ng-template>
       </p-listbox>
     </div>
-    <div class="col-md-10">
+    <div class="md:col-10">
       <p-dataView #dv [value]="products"  filterBy="productTitle"
                   [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
         <ng-template pTemplate="header">
           <div class="flex flex-column md:flex-row md:justify-content-between">
+            <span>{{totalProducts}} adet ürün bulundu!</span>
             <!--        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>-->
             <!--        <span class="p-input-icon-left mb-2 md:mb-0">-->
             <!--                  <i class="pi pi-search"></i>-->
@@ -100,7 +113,7 @@
           </div>
         </ng-template>
         <ng-template let-product pTemplate="gridItem">
-          <div class="col-12 md:col-3">
+          <div class="col-12 md:col-3 flex align-items-stretch">
             <div class="product-grid-item card">
               <div class="product-grid-item-top">
                 <div>
@@ -121,7 +134,7 @@
                   <li *ngFor="let store of product.storeList; let i=index">
                     <a *ngIf="i<3" href="{{store.productUrlInStore}}"
                        target="_blank"  title="Satıcıya Git" rel="nofollow">
-                      <span class="l"> <i class=""><img  alt="N11" src="{{store.store.storeLogo}}"> <b>{{store.price}} TL</b></i> </span>
+                      <span class="l"> <i class=""><img  alt="{{store.store.storeName}}" src="{{store.store.storeLogo}}"> <b>{{store.price}} TL</b></i> </span>
                     </a>
                   </li>
                 </ul>

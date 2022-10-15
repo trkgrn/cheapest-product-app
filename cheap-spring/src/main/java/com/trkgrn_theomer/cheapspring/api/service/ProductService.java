@@ -2,6 +2,8 @@ package com.trkgrn_theomer.cheapspring.api.service;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterElementsDto;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterRequestDto;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.ResponseDto;
 import com.trkgrn_theomer.cheapspring.api.repository.ProductRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,16 @@ public class ProductService {
         Pageable pageable = PageRequest.of(pageNo,pageSize);
         return this.productRepository.findAll(pageable).getContent();
     }
+
+    public List<Product> getAllProductByFilterAndPage(FilterRequestDto filter,int pageNo,int pageSize){
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        return this.productRepository.getProductsByFilter(filter,pageable);
+    }
+
+    public Long countProductsByFilter(FilterRequestDto filter){
+        return this.productRepository.countProductsByFilter(filter);
+    }
+
     public Long getProductCount(){
         return this.productRepository.count();
     }
@@ -59,6 +71,7 @@ public class ProductService {
         elements.setHDDs(this.productRepository.getAllHDD());
         elements.setScreenSizes(this.productRepository.getAllScreenSize());
         elements.setColors(this.productRepository.getAllColor());
+        elements.setRams(this.productRepository.getAllRAM());
         return elements;
     }
 }

@@ -16,22 +16,19 @@ export class ProductListComponent implements OnInit {
   sortOrder: any;
   sortField: any;
   sortKey:any;
-  filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[]};
-  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[]};
+  filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[],rams:[]};
+  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[]};
 
   constructor(private productService: ProductService,private primengConfig: PrimeNGConfig) { }
 
  async ngOnInit() {
-  var filter:any = await this.productService.getFilterElements();
-  this.filterElements = filter;
-   var count:any = await this.productService.getProductCount();
+  var filters:any = await this.productService.getFilterElements();
+  this.filterElements = filters;
+   var count:any = await this.productService.getProductCountByFilter(this.selectedFilters);
    this.totalProducts = count;
    console.log(this.totalProducts)
-   var temp:any =  await this.productService.getProductsByPage(0,24);
-  this.products = temp;
-  console.log(this.filterElements)
-
-
+   var products:any =  await this.productService.getProductsByFilterAndPage(this.selectedFilters,0,24);
+  this.products = products;
 
     this.sortOptions = [
       {label: 'Price High to Low', value: '!price'},
@@ -44,12 +41,16 @@ export class ProductListComponent implements OnInit {
   async onPageChange(event:any){
     let pageNo = event.page;
     let pageSize = event.rows;
-    let productListByPage : any = await this.productService.getProductsByPage(pageNo,pageSize)
+    let productListByPage : any = await this.productService.getProductsByFilterAndPage(this.selectedFilters,pageNo,pageSize)
     this.products = productListByPage;
   }
 
-  filterChange(){
+ async filterChange(){
     console.log(this.selectedFilters)
+    let count:any = await this.productService.getProductCountByFilter(this.selectedFilters);
+    this.totalProducts = count;
+    let products:any = await this.productService.getProductsByFilterAndPage(this.selectedFilters,0,24);
+    this.products = products;
   }
 
   filterStore(store:any){

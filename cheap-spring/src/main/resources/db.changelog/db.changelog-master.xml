@@ -45,7 +45,7 @@
         <insert tableName="store">
             <column name="store_id" value="8"></column>
             <column name="store_name" value="Teknoraks"></column>
-            <column name="store_logo" value="https://st.myideasoft.com/idea/hy/24/themes/selftpl_6312f19b96b35/assets/uploads/logo.png?revision=1665470683"></column>
+            <column name="store_logo" value="https://cdn.shopify.com/s/files/1/0554/5364/6915/files/Teknoraks_Logo.png?height=200&amp;pad_color=ffffff&amp;v=1646405329&amp;width=600"></column>
         </insert>
         <insert tableName="store">
             <column name="store_id" value="9"></column>

@@ -6,4 +6,5 @@ export class SelectedFilter {
   operatingSystem: any;
   screenSize: any;
   color: any;
+  ram:any;
 }

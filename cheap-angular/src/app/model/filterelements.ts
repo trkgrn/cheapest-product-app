@@ -6,4 +6,5 @@ export class FilterElements {
   operatingSystems: any;
   screenSizes: any;
   colors: any;
+  rams:any;
 }

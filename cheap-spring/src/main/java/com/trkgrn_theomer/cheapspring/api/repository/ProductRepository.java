@@ -1,6 +1,9 @@
 package com.trkgrn_theomer.cheapspring.api.repository;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterElementsDto;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterRequestDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -46,6 +49,30 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "SELECT distinct p.CPU  FROM Product p")
     public List<String> getAllCPU();
 
+    @Query(nativeQuery = true,
+            value = "SELECT * " +
+                    " FROM product p\n" +
+                    " WHERE ( :#{#filter.brandName.size()} = 0  OR  p.product_brand IN (:#{#filter.brandName}) )" +
+                    " AND ( :#{#filter.cpu.size()} = 0  OR  p.product_cpu IN (:#{#filter.cpu}) )" +
+                    " AND ( :#{#filter.hdd.size()} = 0  OR  p.product_hdd IN (:#{#filter.hdd}) )" +
+                    " AND ( :#{#filter.ram.size()} = 0  OR  p.product_ram IN (:#{#filter.ram}) )" +
+                    " AND ( :#{#filter.color.size()} = 0  OR  p.product_color IN (:#{#filter.color}) )" +
+                    " AND ( :#{#filter.operatingSystem.size()} = 0  OR  p.product_operating_system IN (:#{#filter.operatingSystem}) )" +
+                    " AND ( :#{#filter.gpu.size()} = 0  OR  p.product_gpu IN (:#{#filter.gpu}) )" +
+                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" )
+    public List<Product> getProductsByFilter(FilterRequestDto filter, Pageable pageable);
 
+    @Query(nativeQuery = true,
+            value = "SELECT count(p.product_id)" +
+                    " FROM product p\n" +
+                    " WHERE ( :#{#filter.brandName.size()} = 0  OR  p.product_brand IN (:#{#filter.brandName}) )" +
+                    " AND ( :#{#filter.cpu.size()} = 0  OR  p.product_cpu IN (:#{#filter.cpu}) )" +
+                    " AND ( :#{#filter.hdd.size()} = 0  OR  p.product_hdd IN (:#{#filter.hdd}) )" +
+                    " AND ( :#{#filter.ram.size()} = 0  OR  p.product_ram IN (:#{#filter.ram}) )" +
+                    " AND ( :#{#filter.color.size()} = 0  OR  p.product_color IN (:#{#filter.color}) )" +
+                    " AND ( :#{#filter.operatingSystem.size()} = 0  OR  p.product_operating_system IN (:#{#filter.operatingSystem}) )" +
+                    " AND ( :#{#filter.gpu.size()} = 0  OR  p.product_gpu IN (:#{#filter.gpu}) )" +
+                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" )
+    public Long countProductsByFilter(FilterRequestDto filter);
 
 }

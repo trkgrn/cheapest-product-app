@@ -2,15 +2,13 @@ package com.trkgrn_theomer.cheapspring.api.controller;
 
 import com.trkgrn_theomer.cheapspring.api.model.concretes.Product;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterElementsDto;
+import com.trkgrn_theomer.cheapspring.api.model.dtos.FilterRequestDto;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.ProductWithStoreDto;
 import com.trkgrn_theomer.cheapspring.api.model.dtos.ResponseDto;
 import com.trkgrn_theomer.cheapspring.api.service.ProductService;
 import com.trkgrn_theomer.cheapspring.api.service.ProductWithStoreService;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +47,29 @@ public class ProductController {
     public List<ResponseDto> getAllProductByPage(@RequestParam int pageNo,
                                                  @RequestParam int pageSize) {
         List<Product> products = this.productService.getAllProductByPage(pageNo, pageSize);
+        List<ResponseDto> response = new ArrayList<>();
+        products.stream().map(product -> {
+            ResponseDto res = new ResponseDto();
+            res.setProduct(product);
+            res.setStoreList(this.productWithStoreService.getByProductId(product.getProductId()).stream().map(productWithStore -> {
+                return modelMapper.map(productWithStore, ProductWithStoreDto.class);
+            }).collect(Collectors.toList()));
+            response.add(res);
+            return product;
+        }).collect(Collectors.toList());
+        return response;
+    }
+
+    @PostMapping("countByFilter")
+    public Long countProductsByFilter(@RequestBody FilterRequestDto filter){
+        return this.productService.countProductsByFilter(filter);
+    }
+
+
+    @PostMapping("/getAllByFilterAndPage")
+    public List<ResponseDto> getAllProductByFilterAndPage(@RequestBody FilterRequestDto filter, @RequestParam int pageNo,
+                                                          @RequestParam int pageSize) {
+        List<Product> products = this.productService.getAllProductByFilterAndPage(filter,pageNo, pageSize);
         List<ResponseDto> response = new ArrayList<>();
         products.stream().map(product -> {
             ResponseDto res = new ResponseDto();
