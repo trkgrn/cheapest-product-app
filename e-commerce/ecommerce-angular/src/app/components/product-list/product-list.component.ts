@@ -3,6 +3,7 @@ import {ProductService} from "../../services/product.service";
 import {PrimeNGConfig, SelectItem} from "primeng/api";
 import {FilterElements} from "../../model/filterelements";
 import {SelectedFilter} from "../../model/selectedfilter";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-product-list',
@@ -15,20 +16,32 @@ export class ProductListComponent implements OnInit {
   sortOptions: SelectItem[]=[];
   sortOrder: any;
   sortField: any;
-  sortKey:any;
+  first = 0;
   filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[],rams:[]};
   selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[]};
 
-  constructor(private productService: ProductService,private primengConfig: PrimeNGConfig) { }
+  constructor(private productService: ProductService,private primengConfig: PrimeNGConfig,
+              private route: ActivatedRoute) { }
 
  async ngOnInit() {
-  var filters:any = await this.productService.getFilterElements();
-  this.filterElements = filters;
-   var count:any = await this.productService.getProductCountByFilter(this.selectedFilters);
-   this.totalProducts = count;
-   console.log(this.totalProducts)
-   var products:any =  await this.productService.getProductsByFilterAndPage(this.selectedFilters,0,24);
-  this.products = products;
+    let pageNo:any = this.route.snapshot.paramMap.get('pageNo')
+    let filters:any = await this.productService.getFilterElements();
+    this.filterElements = filters;
+
+   if (pageNo){
+     let count:any = await this.productService.getProductCountByFilter(this.selectedFilters);
+     this.totalProducts = count;
+     let products:any =  await this.productService.getProductsByFilterAndPage(this.selectedFilters,pageNo-1,24);
+     this.products = products;
+     if (products.length == 0)
+       this.totalProducts = 0
+   }
+   else{
+     let count:any = await this.productService.getProductCountByFilter(this.selectedFilters);
+     this.totalProducts = count;
+     let products:any =  await this.productService.getProductsByFilterAndPage(this.selectedFilters,0,24);
+     this.products = products;
+   }
 
     this.sortOptions = [
       {label: 'Price High to Low', value: '!price'},
@@ -36,7 +49,7 @@ export class ProductListComponent implements OnInit {
     ];
   }
 
-  first = 0;
+
 
   async onPageChange(event:any){
     let pageNo = event.page;

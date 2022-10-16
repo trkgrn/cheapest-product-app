@@ -33,6 +33,7 @@ import {ProductService} from "./services/product.service";
 import {ListboxModule} from "primeng/listbox";
 import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {RatingModule} from "primeng/rating";
     NotfoundComponent,
     TestComponent,
     NavbarComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

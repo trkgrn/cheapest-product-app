@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
+    public Product getByProductCode(String productCode);
+
     @Query(value = "SELECT p.productCode  FROM Product p")
     public List<String> getProductCodes();
 

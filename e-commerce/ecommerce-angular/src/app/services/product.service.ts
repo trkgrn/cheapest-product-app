@@ -23,6 +23,10 @@ export class ProductService {
     return this.httpService.get("product/count");
   }
 
+  getProductByProductCode(productCode:any){
+    return this.httpService.get("product/getByProductCode?productCode="+productCode);
+  }
+
   getFilterElements(){
     return this.httpService.get(("product/getFilterElements"));
   }

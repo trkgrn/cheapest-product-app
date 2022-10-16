@@ -51,5 +51,10 @@ public class ProductController {
         return ResponseEntity.ok(this.productService.getFilterElements());
     }
 
+    @GetMapping("/getByProductCode")
+    public ResponseEntity<Product> getByProductCode(@RequestParam String productCode){
+        return ResponseEntity.ok(this.productService.getByProductCode(productCode));
+    }
+
 
 }

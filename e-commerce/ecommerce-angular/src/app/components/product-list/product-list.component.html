@@ -129,7 +129,7 @@
               </div>
               <div class="product-grid-item-bottom">
                 <span class="product-price">{{product.productPrice}} TL</span>
-                <p-button icon="pi pi-shopping-cart"></p-button>
+                <p-button routerLink="/product/{{product.productCode.replaceAll('/','^')}}" icon="pi pi-shopping-cart"></p-button>
               </div>
             </div>
           </div>

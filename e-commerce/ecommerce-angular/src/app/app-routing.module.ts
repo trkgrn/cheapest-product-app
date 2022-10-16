@@ -9,12 +9,16 @@ import {ForbiddenComponent} from "./components/error/forbidden/forbidden.compone
 import {NotfoundComponent} from "./components/error/notfound/notfound.component";
 import {TestComponent} from "./components/test/test.component";
 import {ProductListComponent} from "./components/product-list/product-list.component";
+import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"home",component:HomeComponent,canActivate:[LoginGuard],data:{roles:['KULLANICI','ADMIN']}},
   {path:"products",component:ProductListComponent},
+  {path:"products/page/:pageNo",component:ProductListComponent},
+  {path:"product/:productCode",component:ProductDetailsComponent},
+  {path:"product",component:ProductDetailsComponent},
   {path:"unauthorized",component:UnauthorizedComponent},
   {path:"forbidden",component:ForbiddenComponent},
   {path:"notfound",component:NotfoundComponent},

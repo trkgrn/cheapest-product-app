@@ -35,6 +35,10 @@ public class ProductService {
         return this.productRepository.getProductIdByProductCode(productCode);
     }
 
+    public Product getByProductCode(String productCode){
+        return this.productRepository.getByProductCode(productCode);
+    }
+
     public List<String> getAllBrandName(){
         return this.productRepository.getAllBrandName();
     }
