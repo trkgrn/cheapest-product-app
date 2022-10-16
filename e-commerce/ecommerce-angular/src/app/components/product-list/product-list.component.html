@@ -1,0 +1,145 @@
+<div class="card">
+  <div class="flex flex-row">
+    <div class=" md:col-2">
+      <p-listbox [options]="filterElements.brandNames" [(ngModel)]="selectedFilters.brandName" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>Marka</b>
+        </ng-template>
+        <ng-template let-brand pTemplate="item">
+          <div class="country-item">
+            <div>{{brand}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.cpus" [(ngModel)]="selectedFilters.cpu" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>İşlemci</b>
+        </ng-template>
+        <ng-template let-cpu pTemplate="item">
+          <div class="country-item">
+            <div>{{cpu}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.gpus" [(ngModel)]="selectedFilters.gpu" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>Ekran Kartı</b>
+        </ng-template>
+        <ng-template let-gpu pTemplate="item">
+          <div class="country-item">
+            <div>{{gpu}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.rams" [(ngModel)]="selectedFilters.ram" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>RAM</b>
+        </ng-template>
+        <ng-template let-ram pTemplate="item">
+          <div class="country-item">
+            <div>{{ram}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.hdds" [(ngModel)]="selectedFilters.hdd" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>Disk</b>
+        </ng-template>
+        <ng-template let-hdd pTemplate="item">
+          <div class="country-item">
+            <div>{{hdd}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+
+      <p-listbox [options]="filterElements.operatingSystems" [(ngModel)]="selectedFilters.operatingSystem" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>İşletim Sistemi</b>
+        </ng-template>
+        <ng-template let-os pTemplate="item">
+          <div class="country-item">
+            <div>{{os}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.colors" [(ngModel)]="selectedFilters.color" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>Renk</b>
+        </ng-template>
+        <ng-template let-color pTemplate="item">
+          <div class="country-item">
+            <div>{{color}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+      <p-listbox [options]="filterElements.screenSizes" [(ngModel)]="selectedFilters.screenSize" [metaKeySelection]="false"
+                 [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
+                 [style]="{'width':'15rem'}" (onChange)="filterChange()">
+        <ng-template pTemplate="header">
+          <b>Ekran Boyutu</b>
+        </ng-template>
+        <ng-template let-size pTemplate="item">
+          <div class="country-item">
+            <div>{{size}}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+    <div class="md:col-10">
+      <p-dataView #dv [value]="products"  filterBy="productTitle"
+                  [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+          <div class="flex flex-column md:flex-row md:justify-content-between">
+            <span>{{totalProducts}} adet ürün bulundu!</span>
+            <!--        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>-->
+            <!--        <span class="p-input-icon-left mb-2 md:mb-0">-->
+            <!--                  <i class="pi pi-search"></i>-->
+            <!--                  <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($any($event.target).value)">-->
+            <!--              </span>-->
+          </div>
+        </ng-template>
+        <ng-template let-product pTemplate="gridItem">
+          <div class="col-12 md:col-3 flex align-items-stretch">
+            <div class="product-grid-item card">
+              <div class="product-grid-item-top">
+                <div>
+                  <i class="pi pi-qrcode product-category-icon"></i>
+                  <span class="product-category">{{product.productCode}}</span>
+                </div>
+              </div>
+              <div class="product-grid-item-content">
+                <img [src]="product.productImage" [alt]="product.productTitle"/>
+                <div class="product-name">{{product.productTitle}}</div>
+                <div class="product-description">{{product.productBrand}}</div>
+                <p-rating [ngModel]="product.productScore" [readonly]="true" [cancel]="false"></p-rating>
+              </div>
+              <div class="product-grid-item-bottom">
+                <span class="product-price">{{product.productPrice}} TL</span>
+                <p-button icon="pi pi-shopping-cart"></p-button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+      </p-dataView>
+      <p-paginator [first]="first" [rows]="24" [totalRecords]="totalProducts" [rowsPerPageOptions]="[24,36,48]"
+                   (onPageChange)="onPageChange($event)"></p-paginator>
+    </div>
+  </div>
+
+
+</div>
