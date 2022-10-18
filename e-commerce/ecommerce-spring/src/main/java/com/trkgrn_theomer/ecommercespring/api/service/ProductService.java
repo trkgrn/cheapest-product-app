@@ -1,5 +1,6 @@
 package com.trkgrn_theomer.ecommercespring.api.service;
 
+import com.trkgrn_theomer.ecommercespring.api.exception.NotFoundExc;
 import com.trkgrn_theomer.ecommercespring.api.model.concretes.Product;
 import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterElementsDto;
 import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterRequestDto;
@@ -15,6 +16,39 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    public List<Product> getAllProducts(){
+        return  productRepository.findAll();
+    }
+    public Product getProductById(Long id){
+        return  productRepository
+                .findById(id)
+                .orElseThrow(()-> new NotFoundExc("Product not found with id: "+id));
+    }
+    public Product updateProductById(Long id, Product updatedProduct){
+        Product product = productRepository
+                .findById(id)
+                .orElseThrow(()-> new NotFoundExc("Product not found with id: "+id));
+        product.setProductCode(updatedProduct.getProductCode());
+        product.setProductBrand(updatedProduct.getProductBrand());
+        product.setProductTitle(updatedProduct.getProductTitle());
+        product.setProductPrice(updatedProduct.getProductPrice());
+        product.setProductScore(updatedProduct.getProductScore());
+        product.setProductImage(updatedProduct.getProductImage());
+        product.setRAM(updatedProduct.getRAM());
+        product.setGPU(updatedProduct.getGPU());
+        product.setCPU(updatedProduct.getCPU());
+        product.setHDD(updatedProduct.getHDD());
+        product.setOperatingSystem(updatedProduct.getOperatingSystem());
+        product.setUsageType(updatedProduct.getUsageType());
+        product.setWeight(updatedProduct.getWeight());
+        product.setScreenSize(updatedProduct.getScreenSize());
+        product.setColor(updatedProduct.getColor());
+
+        return productRepository.save(product);
+    }
+    public void deleteProductById(Long id){
+          productRepository.deleteById(id);
+    }
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
