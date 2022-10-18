@@ -12,6 +12,7 @@ import {ProductListComponent} from "./components/product-list/product-list.compo
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 
 const routes: Routes = [
+  {path:"",redirectTo:"products",pathMatch:"full"},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"home",component:HomeComponent,canActivate:[LoginGuard],data:{roles:['KULLANICI','ADMIN']}},

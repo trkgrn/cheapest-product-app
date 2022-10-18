@@ -117,14 +117,14 @@
             <div class="product-grid-item card">
               <div class="product-grid-item-top">
                 <div>
-                  <i class="pi pi-qrcode product-category-icon"></i>
-                  <span class="product-category">{{product.productCode}}</span>
+                  <i class="pi pi-qrcode product-code-icon"></i>
+                  <span class="product-code">{{product.productCode}}</span>
                 </div>
               </div>
               <div class="product-grid-item-content">
                 <img [src]="product.productImage" [alt]="product.productTitle"/>
-                <div class="product-name">{{product.productTitle}}</div>
-                <div class="product-description">{{product.productBrand}}</div>
+                <div class="product-title">{{product.productTitle}}</div>
+                <div class="product-brand">{{product.productBrand}}</div>
                 <p-rating [ngModel]="product.productScore" [readonly]="true" [cancel]="false"></p-rating>
               </div>
               <div class="product-grid-item-bottom">

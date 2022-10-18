@@ -8,6 +8,7 @@ import {ProductListComponent} from "./components/products/product-list/product-l
 
 const routes: Routes = [
   {path:"products",component:ProductListComponent},
+  {path:"",redirectTo:"products",pathMatch:"full"},
   {path:"unauthorized",component:UnauthorizedComponent},
   {path:"forbidden",component:ForbiddenComponent},
   {path:"notfound",component:NotfoundComponent},

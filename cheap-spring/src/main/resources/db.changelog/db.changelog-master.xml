@@ -57,5 +57,10 @@
             <column name="store_name" value="teknolojipazar"></column>
             <column name="store_logo" value="https://www.teknolojipazar.com/Data/EditorFiles/tp-logo-new.png"></column>
         </insert>
+        <insert tableName="store">
+            <column name="store_id" value="11"></column>
+            <column name="store_name" value="E-commerce"></column>
+            <column name="store_logo" value="https://i.ibb.co/bHm5w2k/Screenshot-9-depositphotos-bgremover.png"></column>
+        </insert>
     </changeSet>
 </databaseChangeLog>

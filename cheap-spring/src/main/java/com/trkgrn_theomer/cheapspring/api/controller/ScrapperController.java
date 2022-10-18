@@ -30,8 +30,9 @@ public class ScrapperController {
     private final VatanScrapperService vatanScrapperService;
     private final CicekSepetiScrapperService cicekSepetiScrapperService;
     private final TrendyolScrapperService trendyolScrapperService;
+    private final EcommerceScrapperService ecommerceScrapperService;
 
-    public ScrapperController(ProductWithStoreService productWithStoreService, VatanDataSetService vatanDataSetService, N11ScrapperService n11ScrapperService, TeknosaScrapperService teknosaScrapperService, PazaramaScrapperService pazaramaScrapperService, TeknolojiPazarScrapperService teknolojiPazarScrapperService, PTTAvmScrapperService pttAvmScrapperService, InceHesapScrapperService inceHesapScrapperService, TeknoraksScrapperService teknoraksScrapperService, VatanScrapperService vatanScrapperService, CicekSepetiScrapperService cicekSepetiScrapperService, TrendyolScrapperService trendyolScrapperService) {
+    public ScrapperController(ProductWithStoreService productWithStoreService, VatanDataSetService vatanDataSetService, N11ScrapperService n11ScrapperService, TeknosaScrapperService teknosaScrapperService, PazaramaScrapperService pazaramaScrapperService, TeknolojiPazarScrapperService teknolojiPazarScrapperService, PTTAvmScrapperService pttAvmScrapperService, InceHesapScrapperService inceHesapScrapperService, TeknoraksScrapperService teknoraksScrapperService, VatanScrapperService vatanScrapperService, CicekSepetiScrapperService cicekSepetiScrapperService, TrendyolScrapperService trendyolScrapperService, EcommerceScrapperService ecommerceScrapperService) {
         this.productWithStoreService = productWithStoreService;
         this.vatanDataSetService = vatanDataSetService;
         this.n11ScrapperService = n11ScrapperService;
@@ -44,6 +45,7 @@ public class ScrapperController {
         this.vatanScrapperService = vatanScrapperService;
         this.cicekSepetiScrapperService = cicekSepetiScrapperService;
         this.trendyolScrapperService = trendyolScrapperService;
+        this.ecommerceScrapperService = ecommerceScrapperService;
     }
 
     @GetMapping("/dataset/vatan")
@@ -134,6 +136,15 @@ public class ScrapperController {
     @GetMapping("/scrape/trendyol")
     public List<ProductWithStore> TrendyolScrape(){
         List<ProductWithStore> products = this.trendyolScrapperService.scrape();
+        products.stream().forEach(p->{
+            productWithStoreService.save(p);
+        });
+        return products;
+    }
+
+    @GetMapping("/scrape/ecommerce")
+    public List<ProductWithStore> EcommerceScrape(){
+        List<ProductWithStore> products = this.ecommerceScrapperService.scrape();
         products.stream().forEach(p->{
             productWithStoreService.save(p);
         });
