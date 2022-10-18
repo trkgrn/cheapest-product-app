@@ -5,6 +5,7 @@ import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterElementsDto;
 import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterRequestDto;
 import com.trkgrn_theomer.ecommercespring.api.scrapper.service.dataset.ProductScrapper;
 import com.trkgrn_theomer.ecommercespring.api.service.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,28 @@ public class ProductController {
     public ProductController(ProductService productService, ProductScrapper productScrapper) {
         this.productService = productService;
         this.productScrapper = productScrapper;
+    }
+
+  @GetMapping("/all")
+    public  List<Product> getAllProducts(){
+        return productService.getAllProducts();
+    }
+
+    @GetMapping("/p/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id){
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+
+   @PutMapping("/p/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct){
+        return productService.updateProductById(id,updatedProduct);
+    }
+
+    @DeleteMapping("/p/{id}")
+    public void deleteProductById(@PathVariable Long id){
+        Product product = productService.getProductById(id);
+         productService.deleteProductById(product.getProductId());
     }
 
     @GetMapping("/scrape")
