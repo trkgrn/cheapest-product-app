@@ -29,18 +29,10 @@ export class HttpService {
 
   patch(url:any, body:any): any {
     return this.http.patch(environment.baseUrl + url, body).toPromise()
-      .then((res:any)=>{
-        if(res.refreshToken)
-          localStorage.setItem("token",res.refreshToken);
-      });
   }
 
   delete(url:any): any {
     return this.http.delete(environment.baseUrl + url).toPromise()
-      .then((res:any)=>{
-        if(res.refreshToken)
-          localStorage.setItem("token",res.refreshToken);
-      });
   }
 
 }

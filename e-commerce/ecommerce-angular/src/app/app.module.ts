@@ -16,7 +16,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./services/auth.service";
 import {LoginGuard} from "./components/auth/login/login.guard";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import { HomeComponent } from './components/home/home.component';
 import {HttpService} from "./services/http.service";
 import {JwtInterceptor} from "./JwtInterceptor";
@@ -34,6 +34,10 @@ import {ListboxModule} from "primeng/listbox";
 import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductManageComponent } from './components/product-manage/product-manage.component';
+import {ToolbarModule} from "primeng/toolbar";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     TestComponent,
     NavbarComponent,
     ProductListComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductManageComponent
   ],
   imports: [
     BrowserModule,
@@ -67,9 +72,12 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     PaginatorModule,
     ListboxModule,
     DataViewModule,
-    RatingModule
+    RatingModule,
+    ToolbarModule,
+    RadioButtonModule,
+    ConfirmDialogModule
   ],
-  providers: [AuthService,LoginGuard,MessageService,ProductService,HttpService,
+  providers: [AuthService,LoginGuard,MessageService,ConfirmationService,ProductService,HttpService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })

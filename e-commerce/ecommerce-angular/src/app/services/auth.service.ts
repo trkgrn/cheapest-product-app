@@ -43,7 +43,11 @@ export class AuthService {
   }
 
   isUserSignedin() {
-    return localStorage.getItem('token') !== null;
+    if (localStorage.getItem('token'))
+      this.loggedIn = true;
+    else
+      this.loggedIn = false;
+    return this.loggedIn;
   }
 
    getUser():any {

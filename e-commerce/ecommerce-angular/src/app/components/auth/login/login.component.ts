@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
  async login()
   {
     let resp:any = await this.authService.login(this.form.value).toPromise()
-      .then(r=>this.router.navigate(["/chat/inbox"]))
+      .then(r=>this.router.navigate(["/products"]))
       .catch((err:any)=>{
         this.messageService.add({severity: 'error', summary: 'Giriş Başarısız',
           detail: 'Hatalı giriş. Lütfen bilgilerini kontrol edip tekrar deneyin.'});

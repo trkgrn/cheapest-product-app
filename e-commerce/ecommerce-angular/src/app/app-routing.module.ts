@@ -10,9 +10,11 @@ import {NotfoundComponent} from "./components/error/notfound/notfound.component"
 import {TestComponent} from "./components/test/test.component";
 import {ProductListComponent} from "./components/product-list/product-list.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
+import {ProductManageComponent} from "./components/product-manage/product-manage.component";
 
 const routes: Routes = [
   {path:"",redirectTo:"products",pathMatch:"full"},
+  {path:"product/manage",component:ProductManageComponent,canActivate:[LoginGuard],data:{roles:['ADMIN']}},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"home",component:HomeComponent,canActivate:[LoginGuard],data:{roles:['KULLANICI','ADMIN']}},

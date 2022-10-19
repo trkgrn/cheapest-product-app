@@ -5,13 +5,10 @@
     </a>
   </div>
   <div class="navigation-icons">
-    <a href="/test" class="navigation-link">
-      <i class="pi pi-compass"></i>
+    <a *ngIf="!authService.isUserSignedin()" href="/login" id="signin" class="navigation-link">
+      <i class="pi pi-sign-in"></i>
     </a>
-    <a href="/home" class="navigation-link">
-      <i class="pi pi-user"></i>
-    </a>
-    <a href="/login" id="signout" class="navigation-link">
+    <a *ngIf="authService.isUserSignedin()" href="/login" id="signout" class="navigation-link">
       <i class="pi pi-sign-out"></i>
     </a>
   </div>

@@ -24,10 +24,10 @@ public class ProductService {
                 .findById(id)
                 .orElseThrow(()-> new NotFoundExc("Product not found with id: "+id));
     }
-    public Product updateProductById(Long id, Product updatedProduct){
+    public Product updateProductById(Product updatedProduct){
         Product product = productRepository
-                .findById(id)
-                .orElseThrow(()-> new NotFoundExc("Product not found with id: "+id));
+                .findById(updatedProduct.getProductId())
+                .orElseThrow(()-> new NotFoundExc("Product not found with id: "+updatedProduct.getProductId()));
         product.setProductCode(updatedProduct.getProductCode());
         product.setProductBrand(updatedProduct.getProductBrand());
         product.setProductTitle(updatedProduct.getProductTitle());
@@ -57,16 +57,12 @@ public class ProductService {
         return this.productRepository.saveAll(products);
     }
 
-    public List<String> getProductCodes()  {
-        return this.productRepository.getProductCodes();
+    public Product save(Product product){
+        return this.productRepository.save(product);
     }
 
     public List<String> getProductCodesByBrand(String brand)  {
     return this.productRepository.getProductCodesByBrand(brand);
-    }
-
-    public Long getProductIdByProductCode(String productCode){
-        return this.productRepository.getProductIdByProductCode(productCode);
     }
 
     public Product getByProductCode(String productCode){

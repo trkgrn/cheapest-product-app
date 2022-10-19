@@ -1,7 +1,6 @@
 package com.trkgrn_theomer.ecommercespring.api.model.concretes;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity

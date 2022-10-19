@@ -31,5 +31,20 @@ export class ProductService {
     return this.httpService.get(("product/getFilterElements"));
   }
 
+  getAllProduct(){
+    return this.httpService.get("product/all");
+  }
+
+  createProduct(product:any){
+   return this.httpService.post("product/create",product);
+  }
+
+  deleteProduct(id:any){
+  return this.httpService.delete("product/delete/"+id);
+  }
+
+  updateProduct(product:any){
+  return this.httpService.put("product/update",product);
+  }
 
 }

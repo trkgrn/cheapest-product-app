@@ -29,18 +29,23 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/p/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id){
         Product product = productService.getProductById(id);
         return ResponseEntity.ok(product);
     }
 
-   @PutMapping("/p/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct){
-        return productService.updateProductById(id,updatedProduct);
+    @PostMapping("/create")
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+        return ResponseEntity.ok(productService.save(product));
     }
 
-    @DeleteMapping("/p/{id}")
+   @PutMapping("/update")
+    public Product updateProduct(@RequestBody Product updatedProduct){
+        return productService.updateProductById(updatedProduct);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteProductById(@PathVariable Long id){
         Product product = productService.getProductById(id);
          productService.deleteProductById(product.getProductId());

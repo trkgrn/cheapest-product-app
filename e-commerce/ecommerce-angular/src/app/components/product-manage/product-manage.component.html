@@ -1,0 +1,180 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table #dt [value]="products" [rows]="10" [paginator]="true"
+           [globalFilterFields]="['name','country.name','representative.name']" responsiveLayout="scroll"
+           [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+           currentPageReportTemplate="{totalRecords} üründen  {first} ile {last} arası gösteriliyor"
+           [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Products</h5>
+        <!--        <span class="p-input-icon-left">-->
+        <!--                    <i class="pi pi-search"></i>-->
+        <!--                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />-->
+        <!--                </span>-->
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="productBrand">Brand
+          <p-sortIcon field="productBrand"></p-sortIcon>
+        </th>
+        <th pSortableColumn="productCode">Code
+          <p-sortIcon field="productCode"></p-sortIcon>
+        </th>
+        <th pSortableColumn="productTitle">Title
+          <p-sortIcon field="productTitle"></p-sortIcon>
+        </th>
+        <th>Image</th>
+        <th pSortableColumn="productPrice">Price
+          <p-sortIcon field="productPrice"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="productScore">Score
+          <p-sortIcon field="productScore"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td></td>
+        <td>{{product.productBrand}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.productTitle}}</td>
+        <td><img [src]="product.productImage" [alt]="product.productTitle" width="100" class="shadow-4"/></td>
+        <td>{{product.productPrice + " TL"}}</td>
+        <td>
+          <p-rating [ngModel]="product.productScore" [readonly]="true" [cancel]="false"></p-rating>
+        </td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                  (click)="editProduct(product)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                  (click)="deleteProduct(product)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Toplamda {{products ? products.length : 0 }} ürün mevcut.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Ürün Detayları" [modal]="true"
+          styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <img [src]="product.productImage" [alt]="product.productImage" class="product-image" *ngIf="product.productImage">
+    <div class="field mt-5">
+      <span class="p-float-label">
+      <input type="text" pInputText id="productBrand" [(ngModel)]="product.productBrand" required autofocus/>
+        <label for="productBrand">Marka</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="productCode" [(ngModel)]="product.productCode" required autofocus/>
+        <label for="productTitle">Product Code</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="productTitle" [(ngModel)]="product.productTitle" required autofocus/>
+        <label for="productTitle">Title</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="productImage" [(ngModel)]="product.productImage" required autofocus/>
+        <label for="productImage">Resim URL</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="operatingSystem" [(ngModel)]="product.operatingSystem" required autofocus/>
+        <label for="operatingSystem">İşletim Sistemi</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="cpu" [(ngModel)]="product.cpu" required autofocus/>
+        <label for="cpu">İşlemci</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="gpu" [(ngModel)]="product.gpu" required autofocus/>
+        <label for="gpu">Ekran Kartı</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="hdd" [(ngModel)]="product.hdd" required autofocus/>
+        <label for="hdd">Disk</label>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="ram" [(ngModel)]="product.ram" required autofocus/>
+        <label for="ram">RAM</label>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="screenSize" [(ngModel)]="product.screenSize" required autofocus/>
+        <label for="screenSize">Ekran Boyutu</label>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="weight" [(ngModel)]="product.weight" required autofocus/>
+        <label for="weight">Ağırlık</label>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="color" [(ngModel)]="product.color" required autofocus/>
+        <label for="color">Renk</label>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="p-float-label">
+      <input type="text" pInputText id="usageType" [(ngModel)]="product.usageType" required autofocus/>
+        <label for="usageType">Kullanım Tipi</label>
+      </span>
+    </div>
+
+
+    <div class="formgrid grid">
+      <div class="field col">
+        <label for="price">Fiyat</label>
+        <p-inputNumber id="price" mode="currency" currency="TRY" [(ngModel)]="product.productPrice"></p-inputNumber>
+      </div>
+      <div class="field col">
+        <label for="rating">Puan</label>
+        <p-inputNumber id="rating" [(ngModel)]="product.productScore" [showButtons]="true" [step]="0.05" [min]="0" [max]="5"></p-inputNumber>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Iptal" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Kaydet" icon="pi pi-check" class="p-button-text" [disabled]="!isValid()" (click)="saveProduct()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
