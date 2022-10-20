@@ -125,11 +125,10 @@
                 <img [src]="product.product.productImage" [alt]="product.product.productTitle"/>
                 <div class="product-name">{{product.product.productTitle}}</div>
                 <div class="product-description">{{product.product.productBrand}}</div>
-                <p-rating [readonly]="true" [cancel]="false"></p-rating>
+                <p-button routerLink="/product/{{product.product.productCode.replaceAll('/','^')}}" icon="pi pi-shopping-cart"></p-button>
               </div>
               <div class="product-grid-item-bottom">
                 <!--            <span class="product-price">${{product.productId}}</span>-->
-                <!--            <p-button icon="pi pi-shopping-cart"></p-button>-->
                 <ul class="product-with-store">
                   <li *ngFor="let store of product.storeList; let i=index">
                     <a *ngIf="i<3" href="{{store.productUrlInStore}}"

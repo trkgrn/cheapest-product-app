@@ -74,4 +74,8 @@ public class ProductService {
         elements.setRams(this.productRepository.getAllRAM());
         return elements;
     }
+
+    public Product getByProductCode(String productCode){
+        return this.productRepository.getByProductCode(productCode);
+    }
 }

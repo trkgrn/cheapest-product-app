@@ -5,9 +5,11 @@ import {ForbiddenComponent} from "./components/error/forbidden/forbidden.compone
 import {NotfoundComponent} from "./components/error/notfound/notfound.component";
 import {TestComponent} from "./components/test/test.component";
 import {ProductListComponent} from "./components/products/product-list/product-list.component";
+import {ProductDetailsComponent} from "./components/products/product-details/product-details.component";
 
 const routes: Routes = [
   {path:"products",component:ProductListComponent},
+  {path:"product/:productCode",component:ProductDetailsComponent},
   {path:"",redirectTo:"products",pathMatch:"full"},
   {path:"unauthorized",component:UnauthorizedComponent},
   {path:"forbidden",component:ForbiddenComponent},

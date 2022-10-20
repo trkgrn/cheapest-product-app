@@ -28,5 +28,9 @@ export class ProductService {
     return this.httpService.get(("product/getFilterElements"));
   }
 
+  getProductByProductCode(productCode:any){
+    return this.httpService.get("product/getByProductCode?productCode="+productCode);
+  }
+
 
 }

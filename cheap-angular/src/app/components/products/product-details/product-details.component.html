@@ -1,0 +1,114 @@
+<section class="section-content padding-y bg">
+  <div class="container">
+
+    <article class="card">
+      <div class="card-body">
+        <div class="row">
+          <aside class="col-md-6">
+            <article class="gallery-wrap">
+              <div class="card img-big-wrap">
+                <a> <img src="{{seenProduct.productImage.replace('small.jpg','large.jpg')}}"></a>
+              </div>
+            </article>
+          </aside>
+          <main class="col-md-6">
+            <article>
+              <a class="text-primary btn-link">Dizüstü Bilgisayar</a>
+              <h3 class="title">{{seenProduct.productTitle}}</h3>
+              <div>
+
+
+              </div>
+
+              <hr>
+
+              <div class="mb-3">
+                <h6>Genel Bilgiler</h6>
+                <ul class="list-dots mb-0">
+                  <li>{{seenProduct.productBrand}}</li>
+                  <li>{{seenProduct.color}}</li>
+                  <li>{{seenProduct.usageType}}</li>
+                  <li>{{seenProduct.weight}}</li>
+                </ul>
+              </div>
+
+<!--              <div class="mb-3">-->
+<!--                <var class="price h4">{{seenProduct.productPrice}} TL</var> <br>-->
+<!--              </div>-->
+
+              <div class="mb-4">
+                <a class="btn btn-primary mr-1">Satın Al</a>
+                <a class="btn btn-light">Sepete Ekle</a>
+              </div>
+
+            </article>
+          </main>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="card mt-5">
+      <div class="card-body">
+        <h5>Bulunan Mağazalar</h5>
+        <ul class="product-with-store">
+          <li *ngFor="let store of seenProductStores; let i=index">
+            <a href="{{store.productUrlInStore}}"
+               target="_blank"  title="Satıcıya Git" rel="nofollow">
+              <span class="l"> <i class=""><img  alt="{{store.store.storeName}}" src="{{store.store.storeLogo}}"> <b>{{store.price}} TL</b></i> </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <article class="card mt-5">
+      <div class="card-body">
+        <div class="row">
+          <aside class="col-md-6">
+            <h5>Teknik Özellikler</h5>
+            <dl class="row">
+              <dt class="col-sm-3">İşlemci</dt>
+              <dd class="col-sm-9">{{seenProduct.cpu}}</dd>
+
+              <dt class="col-sm-3">Ekran Kartı</dt>
+              <dd class="col-sm-9">{{seenProduct.gpu}}</dd>
+
+              <dt class="col-sm-3">RAM</dt>
+              <dd class="col-sm-9">{{seenProduct.ram}}</dd>
+
+              <dt class="col-sm-3">Disk</dt>
+              <dd class="col-sm-9">{{seenProduct.hdd}}</dd>
+
+              <dt class="col-sm-3">İşletim Sistemi</dt>
+              <dd class="col-sm-9">{{seenProduct.operatingSystem}}</dd>
+
+            </dl>
+          </aside>
+          <aside class="col-md-6">
+            <h5>Diğer Özellikler</h5>
+            <dl class="row">
+              <dt class="col-sm-3">Ekran Boyutu</dt>
+              <dd class="col-sm-9">{{seenProduct.screenSize}}</dd>
+
+              <dt class="col-sm-3">Ağırlık</dt>
+              <dd class="col-sm-9">{{seenProduct.weight}}</dd>
+
+              <dt class="col-sm-3">Renk</dt>
+              <dd class="col-sm-9">{{seenProduct.color}}</dd>
+
+              <dt class="col-sm-3">Kullanım Tipi</dt>
+              <dd class="col-sm-9">{{seenProduct.usageType}}</dd>
+
+              <dt class="col-sm-3">Model</dt>
+              <dd class="col-sm-9">{{seenProduct.productCode}}</dd>
+
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

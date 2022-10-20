@@ -66,7 +66,7 @@ public class TeknolojiPazarScrapperService {
         String productUrl = baseURL + a.attr("href");
         Double priceDbl = Double.parseDouble(price.replace(".","").replace(",",".").replace(" TL",""));
         for (String productCode:productCodes) {
-            if (title.contains(productCode)){
+            if (title.toLowerCase().contains(productCode.toLowerCase())){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
                 total++;
                 System.out.println(total+"------------------------------------");

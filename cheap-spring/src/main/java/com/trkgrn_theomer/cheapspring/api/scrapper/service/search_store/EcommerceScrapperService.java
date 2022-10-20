@@ -68,6 +68,10 @@ public class EcommerceScrapperService {
     }
 
     public ProductWithStore getProductWithStore(Element e, List<String> productCodes,int page){
+
+        if (page==12 || page==13){
+            System.out.println("Sayfa: "+page);
+        }
         Product product = new Product();
         String title = e.select("div.product-grid-item > div.product-grid-item-content > div.product-title").text();
         String price = e.select("div.product-grid-item > div.product-grid-item-bottom > span.product-price").text();
@@ -76,7 +80,7 @@ public class EcommerceScrapperService {
         double score = Double.parseDouble(e.select("div.product-grid-item > div.product-grid-item-content > p-rating.p-element").attr("ng-reflect-model"));
         String code = e.select("div.product-grid-item > div.product-grid-item-top > div > span.product-code").text();
         for (String productCode:productCodes) {
-            if (code.contains(productCode)){
+            if (title.toLowerCase().contains(productCode.toLowerCase())){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
                 total++;
                 System.out.println(total+"------------------------------------");

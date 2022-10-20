@@ -51,7 +51,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query(nativeQuery = true,
             value = "SELECT * " +
-                    " FROM product p\n" +
+                    " FROM product p" +
                     " WHERE ( :#{#filter.brandName.size()} = 0  OR  p.product_brand IN (:#{#filter.brandName}) )" +
                     " AND ( :#{#filter.cpu.size()} = 0  OR  p.product_cpu IN (:#{#filter.cpu}) )" +
                     " AND ( :#{#filter.hdd.size()} = 0  OR  p.product_hdd IN (:#{#filter.hdd}) )" +
@@ -64,7 +64,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query(nativeQuery = true,
             value = "SELECT count(p.product_id)" +
-                    " FROM product p\n" +
+                    " FROM product p" +
                     " WHERE ( :#{#filter.brandName.size()} = 0  OR  p.product_brand IN (:#{#filter.brandName}) )" +
                     " AND ( :#{#filter.cpu.size()} = 0  OR  p.product_cpu IN (:#{#filter.cpu}) )" +
                     " AND ( :#{#filter.hdd.size()} = 0  OR  p.product_hdd IN (:#{#filter.hdd}) )" +
@@ -74,5 +74,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
                     " AND ( :#{#filter.gpu.size()} = 0  OR  p.product_gpu IN (:#{#filter.gpu}) )" +
                     " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" )
     public Long countProductsByFilter(FilterRequestDto filter);
+
+    public Product getByProductCode(String productCode);
 
 }
