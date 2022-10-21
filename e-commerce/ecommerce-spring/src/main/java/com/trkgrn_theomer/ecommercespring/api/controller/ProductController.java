@@ -25,8 +25,8 @@ public class ProductController {
     }
 
   @GetMapping("/all")
-    public  List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public  ResponseEntity<List<Product>> getAllProducts(){
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/get/{id}")
@@ -41,8 +41,8 @@ public class ProductController {
     }
 
    @PutMapping("/update")
-    public Product updateProduct(@RequestBody Product updatedProduct){
-        return productService.updateProductById(updatedProduct);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product updatedProduct){
+        return ResponseEntity.ok(productService.updateProductById(updatedProduct));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -52,19 +52,19 @@ public class ProductController {
     }
 
     @GetMapping("/scrape")
-    public List<Product> dataSetCreate() throws IOException {
+    public ResponseEntity<List<Product>> dataSetCreate() throws IOException {
         List<Product> addedProducts = this.productService.saveAll(this.productScrapper.scrape());
-        return addedProducts;
+        return ResponseEntity.ok(addedProducts);
     }
 
     @GetMapping("getProductCodesByBrand")
-    public List<String> getProductCodesByBrand(@RequestParam String brand)  {
-        return this.productService.getProductCodesByBrand(brand);
+    public ResponseEntity<List<String>> getProductCodesByBrand(@RequestParam String brand)  {
+        return ResponseEntity.ok(this.productService.getProductCodesByBrand(brand));
     }
 
     @PostMapping("countByFilter")
-    public Long countProductsByFilter(@RequestBody FilterRequestDto filter){
-        return this.productService.countProductsByFilter(filter);
+    public ResponseEntity<Long> countProductsByFilter(@RequestBody FilterRequestDto filter){
+        return ResponseEntity.ok(this.productService.countProductsByFilter(filter));
     }
 
 

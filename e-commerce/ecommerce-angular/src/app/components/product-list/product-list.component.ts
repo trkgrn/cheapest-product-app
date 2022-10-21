@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   sortField: any;
   first = 0;
   filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[],rams:[]};
-  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[]};
+  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[],orderBy:{}};
 
   constructor(private productService: ProductService,private primengConfig: PrimeNGConfig,
               private route: ActivatedRoute) { }
@@ -44,8 +44,10 @@ export class ProductListComponent implements OnInit {
    }
 
     this.sortOptions = [
-      {label: 'Price High to Low', value: '!price'},
-      {label: 'Price Low to High', value: 'price'}
+      {label: 'Fiyata göre azalan', value:{field:'product_price',type:'DESC'}},
+      {label: 'Fiyata göre artan', value: {field:'product_price',type:'ASC'}},
+      {label: 'Puana göre azalan', value: {field:'product_score',type:'DESC'}},
+      {label: 'Puana göre artan' , value: {field:'product_score',type:'ASC'}}
     ];
   }
 

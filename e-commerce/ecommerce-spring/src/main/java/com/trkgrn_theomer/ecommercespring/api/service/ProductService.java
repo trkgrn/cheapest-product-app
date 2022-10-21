@@ -5,8 +5,10 @@ import com.trkgrn_theomer.ecommercespring.api.model.concretes.Product;
 import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterElementsDto;
 import com.trkgrn_theomer.ecommercespring.api.model.dtos.FilterRequestDto;
 import com.trkgrn_theomer.ecommercespring.api.repository.ProductRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,6 +77,13 @@ public class ProductService {
 
     public List<Product> getAllProductByFilterAndPage(FilterRequestDto filter, int pageNo, int pageSize){
         Pageable pageable = PageRequest.of(pageNo,pageSize);
+        if (filter.getOrderBy().getField() != null) {
+            if (filter.getOrderBy().getType().contains("ASC")) {
+                pageable = PageRequest.of(pageNo, pageSize, Sort.by(filter.getOrderBy().getField()).ascending());
+            } else if (filter.getOrderBy().getType().contains("DESC")) {
+                pageable = PageRequest.of(pageNo, pageSize, Sort.by(filter.getOrderBy().getField()).descending());
+            }
+        }
         return this.productRepository.getProductsByFilter(filter,pageable);
     }
 
