@@ -23,6 +23,8 @@ public class ProductWithStoreService {
             System.out.println("Böyle bir satır var!");
             System.out.println("Eski Fiyat: " + temp.getPrice() + " Yeni Fiyat: "+ productWithStore.getPrice());
                 temp.setPrice(productWithStore.getPrice());
+                temp.setScore(productWithStore.getScore());
+                temp.setProductUrlInStore(productWithStore.getProductUrlInStore());
                 return this.productWithStoreRepository.save(temp);
         }
        return this.productWithStoreRepository.save(productWithStore);

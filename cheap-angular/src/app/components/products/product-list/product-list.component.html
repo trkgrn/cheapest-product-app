@@ -1,7 +1,8 @@
 <div class="card">
   <div class="flex flex-row">
     <div class=" md:col-2">
-      <p-listbox [options]="filterElements.brandNames" [(ngModel)]="selectedFilters.brandName" [metaKeySelection]="false"
+      <p-listbox [options]="filterElements.brandNames" [(ngModel)]="selectedFilters.brandName"
+                 [metaKeySelection]="false"
                  [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
                  [style]="{'width':'15rem'}" (onChange)="filterChange()">
         <ng-template pTemplate="header">
@@ -62,7 +63,8 @@
         </ng-template>
       </p-listbox>
 
-      <p-listbox [options]="filterElements.operatingSystems" [(ngModel)]="selectedFilters.operatingSystem" [metaKeySelection]="false"
+      <p-listbox [options]="filterElements.operatingSystems" [(ngModel)]="selectedFilters.operatingSystem"
+                 [metaKeySelection]="false"
                  [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
                  [style]="{'width':'15rem'}" (onChange)="filterChange()">
         <ng-template pTemplate="header">
@@ -86,7 +88,8 @@
           </div>
         </ng-template>
       </p-listbox>
-      <p-listbox [options]="filterElements.screenSizes" [(ngModel)]="selectedFilters.screenSize" [metaKeySelection]="false"
+      <p-listbox [options]="filterElements.screenSizes" [(ngModel)]="selectedFilters.screenSize"
+                 [metaKeySelection]="false"
                  [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="" [listStyle]="{'max-height':'200px'}"
                  [style]="{'width':'15rem'}" (onChange)="filterChange()">
         <ng-template pTemplate="header">
@@ -100,7 +103,7 @@
       </p-listbox>
     </div>
     <div class="md:col-10">
-      <p-dataView #dv [value]="products"  filterBy="productTitle"
+      <p-dataView #dv [value]="products" filterBy="productTitle"
                   [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
         <ng-template pTemplate="header">
           <div class="flex flex-column md:flex-row md:justify-content-between">
@@ -123,17 +126,23 @@
               </div>
               <div class="product-grid-item-content">
                 <img [src]="product.product.productImage" [alt]="product.product.productTitle"/>
-                <div class="product-name">{{product.product.productTitle}}</div>
-                <div class="product-description">{{product.product.productBrand}}</div>
-                <p-button routerLink="/product/{{product.product.productCode.replaceAll('/','^')}}" icon="pi pi-shopping-cart"></p-button>
+                <div class="product-name">
+                  <a
+                    href="{{'/product/'+product.product.productCode.replaceAll('/','^')}}">{{product.product.productTitle}}</a>
+                </div>
+                <div class="product-brand">{{product.product.productBrand}}</div>
+                <button class="btn btn-primary"
+                        routerLink="/product/{{product.product.productCode.replaceAll('/','^')}}">Detayları Görüntüle
+                </button>
               </div>
               <div class="product-grid-item-bottom">
                 <!--            <span class="product-price">${{product.productId}}</span>-->
                 <ul class="product-with-store">
                   <li *ngFor="let store of product.storeList; let i=index">
                     <a *ngIf="i<3" href="{{store.productUrlInStore}}"
-                       target="_blank"  title="Satıcıya Git" rel="nofollow">
-                      <span class="l"> <i class=""><img  alt="{{store.store.storeName}}" src="{{store.store.storeLogo}}"> <b>{{store.price}} TL</b></i> </span>
+                       target="_blank" title="Satıcıya Git" rel="nofollow">
+                      <span class="l"> <i class=""><img alt="{{store.store.storeName}}" src="{{store.store.storeLogo}}"> <b>{{store.price}}
+                        TL</b></i> </span>
                     </a>
                   </li>
                 </ul>

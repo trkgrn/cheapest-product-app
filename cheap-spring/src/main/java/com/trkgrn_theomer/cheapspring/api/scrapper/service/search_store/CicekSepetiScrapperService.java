@@ -66,7 +66,7 @@ public class CicekSepetiScrapperService {
             if (title.toLowerCase().contains(productCode.toLowerCase())){
                 product.setProductId(productService.getProductIdByProductCode(productCode));
                 total++;
-                double score = getScore(a);
+                Double score = getScore(a);
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+productCode);
                 System.out.println("Title: "+title);
@@ -75,15 +75,15 @@ public class CicekSepetiScrapperService {
                 System.out.println("Page: "+page);
                 System.out.println("PUAN: "+ score);
 
-                return new ProductWithStore(0L,product,ciceksepeti,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,ciceksepeti,priceDbl,productUrl,score);
             }
         }
         return null;
     }
 
-    private double getScore(Element a){
+    private Double getScore(Element a){
         Element star = a.selectFirst("div.products__item-info > div.products__item-details > div.products-stars.js-products-stars > div.products-stars__dropdown-evaluation");
-        double score = 0.0;
+        Double score = 0.0;
         if (star != null) {
             for (Element s: star.select("div.products-stars__icon-wrapper")) {
                 if (s.html().contains("is-passive")) {

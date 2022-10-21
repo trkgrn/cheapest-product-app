@@ -3,6 +3,7 @@ import {ProductService} from "../../../services/product.service";
 import {PrimeNGConfig, SelectItem} from "primeng/api";
 import {FilterElements} from "../../../model/filterelements";
 import {SelectedFilter} from "../../../model/selectedfilter";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
   filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[],rams:[]};
   selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[]};
 
-  constructor(private productService: ProductService,private primengConfig: PrimeNGConfig) { }
+  constructor(private productService: ProductService,private primengConfig: PrimeNGConfig,
+              public route:Router) { }
 
  async ngOnInit() {
   var filters:any = await this.productService.getFilterElements();

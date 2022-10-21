@@ -75,7 +75,7 @@ public class TeknolojiPazarScrapperService {
                 System.out.println("Price: "+price);
                 System.out.println("URL: "+productUrl);
                 System.out.println("Page: "+page);
-                return new ProductWithStore(0L,product,teknolojipazar,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,teknolojipazar,priceDbl,productUrl,0.0);
             }
         }
         return null;

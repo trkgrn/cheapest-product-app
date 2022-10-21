@@ -32,4 +32,7 @@ public class ProductWithStore {
 
     @Column(name = "product_url")
     private String productUrlInStore;
+
+    @Column(name = "product_score")
+    private Double score;
 }

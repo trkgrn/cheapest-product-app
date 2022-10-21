@@ -74,7 +74,7 @@ public class InceHesapScrapperService {
                 System.out.println("URL: "+productUrl);
                 System.out.println("Page: "+page);
                 System.out.println("PUAN: " + score);
-                return new ProductWithStore(0L,product,incehesap,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,incehesap,priceDbl,productUrl,score);
             }
         }
         return null;

@@ -82,7 +82,7 @@ public class PazaramaScrapperService {
                 System.out.println("URL: " + productURL);
                 System.out.println("Page: " + page);
                 System.out.println("Product Code Count: "+productCodes.size());
-                return new ProductWithStore(0L,product,pazarama,priceDbl,productURL);
+                return new ProductWithStore(0L,product,pazarama,priceDbl,productURL,0.0);
             }
         }
         return null;

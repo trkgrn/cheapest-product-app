@@ -106,7 +106,7 @@ public class N11ScrapperService {
                 System.out.println("URL: " + productURL);
                 System.out.println("PUAN: " + score);
 
-                return new ProductWithStore(null,product,n11,priceDbl,productURL);
+                return new ProductWithStore(null,product,n11,priceDbl,productURL,score);
             }
         }
 

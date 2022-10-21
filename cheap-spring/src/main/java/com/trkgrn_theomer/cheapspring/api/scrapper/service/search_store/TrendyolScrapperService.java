@@ -85,7 +85,7 @@ public class TrendyolScrapperService {
                 System.out.println("Price: " + priceDbl);
                 System.out.println("URL: " + productUrl);
                 System.out.println("PUAN: " + score);
-                return new ProductWithStore(0L, product, trendyol, priceDbl, productUrl);
+                return new ProductWithStore(0L, product, trendyol, priceDbl, productUrl,score);
             }
         return null;
     }

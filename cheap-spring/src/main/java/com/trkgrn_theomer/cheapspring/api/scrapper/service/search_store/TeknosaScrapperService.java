@@ -74,7 +74,7 @@ public class TeknosaScrapperService {
                 System.out.println("Price: "+priceDbl);
                 System.out.println("URL: "+ productUrl);
                 System.out.println("Page: "+ page);
-                return new ProductWithStore(0L,product,teknosa,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,teknosa,priceDbl,productUrl,0.0);
             }
         }
         return null;

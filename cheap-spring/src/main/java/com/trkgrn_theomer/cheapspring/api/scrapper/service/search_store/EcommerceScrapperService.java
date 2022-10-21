@@ -77,7 +77,7 @@ public class EcommerceScrapperService {
         String price = e.select("div.product-grid-item > div.product-grid-item-bottom > span.product-price").text();
         Double priceDbl = Double.parseDouble(price.replace(" TL",""));
         String productUrl = baseUrl + e.select("div.product-grid-item > div.product-grid-item-bottom > p-button").attr("ng-reflect-router-link");
-        double score = Double.parseDouble(e.select("div.product-grid-item > div.product-grid-item-content > p-rating.p-element").attr("ng-reflect-model"));
+        Double score = Double.parseDouble(e.select("div.product-grid-item > div.product-grid-item-content > p-rating.p-element").attr("ng-reflect-model"));
         String code = e.select("div.product-grid-item > div.product-grid-item-top > div > span.product-code").text();
         for (String productCode:productCodes) {
             if (title.toLowerCase().contains(productCode.toLowerCase())){
@@ -90,7 +90,7 @@ public class EcommerceScrapperService {
                 System.out.println("URL: "+productUrl);
                 System.out.println("Page: "+page);
                 System.out.println("Score: "+score);
-                return new ProductWithStore(0L,product,ecommerce,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,ecommerce,priceDbl,productUrl,score);
             }
         }
         return null;

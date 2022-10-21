@@ -80,7 +80,7 @@ public class VatanScrapperService {
                 System.out.println("URL: " + productUrl);
                 System.out.println("Page: " + page);
                 System.out.println("PUAN: " + score);
-                return new ProductWithStore(0L, product, vatan, priceDbl, productUrl);
+                return new ProductWithStore(0L, product, vatan, priceDbl, productUrl,score);
             }
         }
         return null;

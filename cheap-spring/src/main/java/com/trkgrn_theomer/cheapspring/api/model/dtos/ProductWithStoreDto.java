@@ -12,4 +12,5 @@ public class ProductWithStoreDto {
     private Store store;
     private Double price;
     private String productUrlInStore;
+    private Double score;
 }

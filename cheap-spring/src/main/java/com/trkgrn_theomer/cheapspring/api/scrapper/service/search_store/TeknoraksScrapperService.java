@@ -72,7 +72,7 @@ public class TeknoraksScrapperService {
                 System.out.println("Price: "+price);
                 System.out.println("URL: "+productUrl);
                 System.out.println("Page: "+page);
-                return new ProductWithStore(0L,product,teknoraks,priceDbl,productUrl);
+                return new ProductWithStore(0L,product,teknoraks,priceDbl,productUrl,0.0);
             }
         }
         return null;
