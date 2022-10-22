@@ -3,42 +3,42 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+      <button pButton pRipple label="Yeni" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
     </ng-template>
   </p-toolbar>
 
-  <p-table #dt [value]="products" [rows]="10" [paginator]="true"
-           [globalFilterFields]="['name','country.name','representative.name']" responsiveLayout="scroll"
+  <p-table #dt [value]="products" [rows]="5" [paginator]="true"
+           [globalFilterFields]="['productBrand','productTitle','productCode']" responsiveLayout="scroll"
            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
            currentPageReportTemplate="{totalRecords} üründen  {first} ile {last} arası gösteriliyor"
            [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="m-0">Manage Products</h5>
-        <!--        <span class="p-input-icon-left">-->
-        <!--                    <i class="pi pi-search"></i>-->
-        <!--                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />-->
-        <!--                </span>-->
+        <h5 class="m-0">Ürün Yönetimi</h5>
+                <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" placeholder="Ara..." />
+                        </span>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 3rem"></th>
-        <th pSortableColumn="productBrand">Brand
+        <th pSortableColumn="productBrand">Marka
           <p-sortIcon field="productBrand"></p-sortIcon>
         </th>
-        <th pSortableColumn="productCode">Code
+        <th pSortableColumn="productCode">Ürün Kodu
           <p-sortIcon field="productCode"></p-sortIcon>
         </th>
-        <th pSortableColumn="productTitle">Title
+        <th pSortableColumn="productTitle">Başlık
           <p-sortIcon field="productTitle"></p-sortIcon>
         </th>
-        <th>Image</th>
-        <th pSortableColumn="productPrice">Price
+        <th>Resim</th>
+        <th pSortableColumn="productPrice">Fiyat
           <p-sortIcon field="productPrice"></p-sortIcon>
         </th>
 
-        <th pSortableColumn="productScore">Score
+        <th pSortableColumn="productScore">Puan
           <p-sortIcon field="productScore"></p-sortIcon>
         </th>
         <th></th>
@@ -84,13 +84,13 @@
     <div class="field">
       <span class="p-float-label">
       <input type="text" pInputText id="productCode" [(ngModel)]="product.productCode" required autofocus/>
-        <label for="productTitle">Product Code</label>
+        <label for="productTitle">Ürün kodu</label>
       </span>
     </div>
     <div class="field">
       <span class="p-float-label">
       <input type="text" pInputText id="productTitle" [(ngModel)]="product.productTitle" required autofocus/>
-        <label for="productTitle">Title</label>
+        <label for="productTitle">Başlık</label>
       </span>
     </div>
     <div class="field">

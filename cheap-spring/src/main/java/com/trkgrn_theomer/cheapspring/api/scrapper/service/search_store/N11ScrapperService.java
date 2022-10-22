@@ -97,7 +97,7 @@ public class N11ScrapperService {
                     .replace(",",".")
                     .replace(" TL",""));
             if (title.toLowerCase().contains(productCode.toLowerCase())){
-                product.setProductId(productService.getProductIdByProductCode(productCode));
+                product = productService.getByProductCode(productCode);
                 total++;
                 System.out.println(total + "------------------------------------");
                 System.out.println("Product Code: " + productCode);

@@ -64,7 +64,7 @@ public class CicekSepetiScrapperService {
         Double priceDbl = Double.parseDouble(price.replace(".", ""));
         for (String productCode:productCodes) {
             if (title.toLowerCase().contains(productCode.toLowerCase())){
-                product.setProductId(productService.getProductIdByProductCode(productCode));
+                product = productService.getByProductCode(productCode);
                 total++;
                 Double score = getScore(a);
                 System.out.println(total+"------------------------------------");

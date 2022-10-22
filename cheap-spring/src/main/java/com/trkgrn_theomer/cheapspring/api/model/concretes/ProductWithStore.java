@@ -35,4 +35,14 @@ public class ProductWithStore {
 
     @Column(name = "product_score")
     private Double score;
+
+    @Override
+    public String toString() {
+        return "ProductWithStore{" +
+                "productId=" + product.getProductId() +
+                ", price=" + price +
+                ", productUrlInStore='" + productUrlInStore + '\'' +
+                ", score=" + score +
+                "}\n";
+    }
 }

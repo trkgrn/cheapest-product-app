@@ -35,7 +35,7 @@ public class VatanDataSetService {
                 throw new RuntimeException();
             }
         }).flatMap(List::stream).collect(Collectors.toList());
-      //  List<Product> savedProducts = this.productService.saveAll(products);
+        List<Product> savedProducts = this.productService.saveAll(products);
         System.out.println(products);
         return products;
     }
@@ -85,7 +85,7 @@ public class VatanDataSetService {
             Elements tbody = e.select("div.product-feature > table.product-table > tbody");
 
             if (title.equals("İşlemci Özellikleri")) {
-                product.setCPU(this.getCpuProperty(tbody));
+                product.setCPU(this.getCpuProperty(tbody).replace("®","").toUpperCase());
             } else if (title.equals("Ram Özellikleri")) {
                 product.setRAM(this.getRamProperty(tbody));
             } else if (title.equals("Ekran kartı")) {
@@ -93,7 +93,7 @@ public class VatanDataSetService {
             } else if (title.equals("HDD Özellikleri")) {
                 product.setHDD(this.getHddProperty(tbody));
             } else if (title.equals("İşletim Sistemi")) {
-                product.setOperatingSystem(this.getOperatingSystemProperty(tbody));
+                product.setOperatingSystem(this.getOperatingSystemProperty(tbody).replace("FreeDOS","Free Dos"));
             } else if (title.equals("Ekran Özellikleri")) {
                 product.setScreenSize(this.getScreenSizeProperty(tbody));
             } else if (title.equals("Genel Özellikler")) {

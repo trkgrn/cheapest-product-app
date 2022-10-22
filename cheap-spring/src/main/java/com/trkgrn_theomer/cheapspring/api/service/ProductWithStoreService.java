@@ -46,10 +46,11 @@ public class ProductWithStoreService {
         list =  list.stream().map(item->{
             List<ProductWithStore> duplicates = new ArrayList<>();
             for (ProductWithStore iter:tempList) {
-                if (item.getProduct().getProductId() == iter.getProduct().getProductId()){
+                if (item.getProduct().equals(iter.getProduct())){
                     duplicates.add(iter);
                 }
             }
+
             duplicates = duplicates.stream()
                     .sorted(Comparator.comparing(ProductWithStore::getPrice))
                     .collect(Collectors.toList());

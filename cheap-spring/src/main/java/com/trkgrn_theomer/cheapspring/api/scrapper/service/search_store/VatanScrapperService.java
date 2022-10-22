@@ -71,7 +71,7 @@ public class VatanScrapperService {
 
         for (String productCode : productCodes) {
             if (title.contains(productCode)) {
-                product.setProductId(productService.getProductIdByProductCode(productCode));
+                product = productService.getByProductCode(productCode);
                 total++;
                 System.out.println(total + "------------------------------------");
                 System.out.println("Product Code: " + productCode);

@@ -80,8 +80,8 @@ public class EcommerceScrapperService {
         Double score = Double.parseDouble(e.select("div.product-grid-item > div.product-grid-item-content > p-rating.p-element").attr("ng-reflect-model"));
         String code = e.select("div.product-grid-item > div.product-grid-item-top > div > span.product-code").text();
         for (String productCode:productCodes) {
-            if (title.toLowerCase().contains(productCode.toLowerCase())){
-                product.setProductId(productService.getProductIdByProductCode(productCode));
+            if (code.contains(productCode)){
+                product = productService.getByProductCode(productCode);
                 total++;
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+code);

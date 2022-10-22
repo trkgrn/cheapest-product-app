@@ -65,7 +65,7 @@ public class InceHesapScrapperService {
                 .replace(" TL", ""));
         for (String productCode:productCodes) {
             if (title.toLowerCase().contains(productCode.toLowerCase())){
-                product.setProductId(productService.getProductIdByProductCode(productCode));
+                product = productService.getByProductCode(productCode);
                 total++;
                 System.out.println(total+"------------------------------------");
                 System.out.println("Product Code: "+productCode);

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.14.xsd">
+
+    <changeSet author="trkgrn (generated)" id="1666355619433-1">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pkey"/>
+            </column>
+            <column name="user_mail" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="user_password" type="VARCHAR(255)"/>
+            <column name="user_role" type="VARCHAR(255)"/>
+            <column name="user_tel_no" type="VARCHAR(255)"/>
+            <column name="user_username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-2">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="product_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+            <column name="product_cpu" type="VARCHAR(255)"/>
+            <column name="product_gpu" type="VARCHAR(255)"/>
+            <column name="product_hdd" type="VARCHAR(255)"/>
+            <column name="product_ram" type="VARCHAR(255)"/>
+            <column name="product_color" type="VARCHAR(255)"/>
+            <column name="product_operating_system" type="VARCHAR(255)"/>
+            <column name="product_brand" type="VARCHAR(255)"/>
+            <column name="product_code" type="VARCHAR(255)"/>
+            <column name="product_image" type="VARCHAR(255)"/>
+            <column name="product_title" type="VARCHAR(255)"/>
+            <column name="product_screen_size" type="VARCHAR(255)"/>
+            <column name="product_usage_type" type="VARCHAR(255)"/>
+            <column name="product_weight" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-3">
+        <addUniqueConstraint columnNames="user_mail" constraintName="uk_1v3df5idmr0miyyukv06c7m59" tableName="user"/>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-4">
+        <addUniqueConstraint columnNames="user_tel_no" constraintName="uk_59d3vonvnvq1kxmj1ef4mdxqo" tableName="user"/>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-5">
+        <addUniqueConstraint columnNames="user_username" constraintName="uk_jnu1quvkutdk73q9fa4d7abe3" tableName="user"/>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-6">
+        <addUniqueConstraint columnNames="product_code" constraintName="uk_hcpr86kgtroqvxu1mxoyx4ahm" tableName="product"/>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-8">
+        <createTable tableName="product_with_store">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_with_store_pkey"/>
+            </column>
+            <column name="product_price" type="FLOAT8"/>
+            <column name="product_url" type="VARCHAR(255)"/>
+            <column name="product_score" type="FLOAT8"/>
+            <column name="product_id" type="BIGINT"/>
+            <column name="store_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-9">
+        <createTable tableName="store">
+            <column autoIncrement="true" name="store_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="store_pkey"/>
+            </column>
+            <column name="store_logo" type="VARCHAR(255)"/>
+            <column name="store_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-11">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_with_store" constraintName="fkj4d82opuuqxm4y1yl4ot40qae" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="product_id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="trkgrn (generated)" id="1666355619433-12">
+        <addForeignKeyConstraint baseColumnNames="store_id" baseTableName="product_with_store" constraintName="fkkefgj2irrj92t4nkgd2b2w695" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="store_id" referencedTableName="store" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

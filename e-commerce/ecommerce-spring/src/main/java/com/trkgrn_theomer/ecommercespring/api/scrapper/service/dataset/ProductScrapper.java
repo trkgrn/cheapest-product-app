@@ -106,7 +106,7 @@ public class ProductScrapper {
             } else if (title.equals("HDD Özellikleri")) {
                 product.setHDD(this.getHddProperty(tbody));
             } else if (title.equals("İşletim Sistemi")) {
-                product.setOperatingSystem(this.getOperatingSystemProperty(tbody));
+                product.setOperatingSystem(this.getOperatingSystemProperty(tbody).replace("FreeDOS","Free Dos"));
             } else if (title.equals("Ekran Özellikleri")) {
                 product.setScreenSize(this.getScreenSizeProperty(tbody));
             } else if (title.equals("Genel Özellikler")) {

@@ -18,6 +18,8 @@ export class ProductManageComponent implements OnInit {
 
   productDialog: boolean = false;
 
+  search:any;
+
   constructor(private productService: ProductService, private messageService: MessageService,
               private confirmationService: ConfirmationService) {
   }
@@ -55,15 +57,17 @@ export class ProductManageComponent implements OnInit {
       accept: async () => {
         await this.productService.deleteProduct(this.product.productId)
           .then((res: any) => {
-            this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+            this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Ürün başarıyla silindi', life: 3000});
           })
           .catch((err: any) => {
             console.log(err)
-            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Product Not Deleted', life: 3000});
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Ürün silinemedi!', life: 3000});
           });
         let productList:any = await this.productService.getAllProduct();
         this.products = productList;
-      }
+      },
+      acceptLabel:'Evet',
+      rejectLabel:'Hayır'
     });
   } // düzenle
 
@@ -76,22 +80,22 @@ export class ProductManageComponent implements OnInit {
       await this.productService.updateProduct(this.product)
         .then((res: any) => {
           console.log(res)
-          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Ürün başarıyla güncellendi!', life: 3000});
         })
         .catch((err: any) => {
           console.log(err)
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Product Not Updated', life: 3000});
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Ürün güncellenmedi!', life: 3000});
         });
     } else {
       this.product.productId = 0;
       await this.productService.createProduct(this.product)
         .then((res: any) => {
           console.log(res)
-          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Yeni ürün başarıyla oluşturuldu!', life: 3000});
         })
         .catch((err: any) => {
           console.log(err)
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Product Not Created', life: 3000});
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Yeni ürün oluşturulamadı!', life: 3000});
         });
     }
     this.productDialog = false;
