@@ -42,7 +42,7 @@ public class ProductScrapper {
 
     private List<Product> getProducts(int page) throws IOException {
         List<Product> productList = new ArrayList<>();
-        Document doc = Jsoup.connect(url + page).userAgent(userAgents).get();
+        Document doc = Jsoup.connect(url + page).timeout(0).get();
 
         Elements body = doc.select("div.wrapper-product--list-page");
         for (Element e : body.select("div.product-list--list-page")) {
@@ -86,7 +86,7 @@ public class ProductScrapper {
 
     public Product getProduct(String url) throws IOException {
         Product product = new Product();
-        Document doc = Jsoup.connect(url).userAgent(userAgents).get();
+        Document doc = Jsoup.connect(url).timeout(0).get();
 
         String productBrand = doc.select("ul.breadcrumb > li:nth-child(4) > a").text();
         product.setProductBrand(productBrand);

@@ -60,4 +60,14 @@ public class ProductWithStoreService {
         list = list.stream().distinct().collect(Collectors.toList());
         return list;
     }
+
+    public void deleteByStoreId(Long storeId){
+        try {
+            this.productWithStoreRepository.deleteByStoreId(storeId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }

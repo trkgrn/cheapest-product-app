@@ -7,4 +7,5 @@ export class SelectedFilter {
   screenSize: any;
   color: any;
   ram:any;
+  searchTitle:any;
 }

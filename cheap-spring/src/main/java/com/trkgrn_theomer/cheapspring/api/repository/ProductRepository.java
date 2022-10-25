@@ -59,7 +59,8 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
                     " AND ( :#{#filter.color.size()} = 0  OR  p.product_color IN (:#{#filter.color}) )" +
                     " AND ( :#{#filter.operatingSystem.size()} = 0  OR  p.product_operating_system IN (:#{#filter.operatingSystem}) )" +
                     " AND ( :#{#filter.gpu.size()} = 0  OR  p.product_gpu IN (:#{#filter.gpu}) )" +
-                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" )
+                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" +
+                    " AND ( :#{#filter.searchTitle.length()} = 0 OR lower(p.product_title) like concat('%',:#{#filter.searchTitle.toLowerCase()},'%'))" )
     public List<Product> getProductsByFilter(FilterRequestDto filter, Pageable pageable);
 
     @Query(nativeQuery = true,
@@ -72,7 +73,8 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
                     " AND ( :#{#filter.color.size()} = 0  OR  p.product_color IN (:#{#filter.color}) )" +
                     " AND ( :#{#filter.operatingSystem.size()} = 0  OR  p.product_operating_system IN (:#{#filter.operatingSystem}) )" +
                     " AND ( :#{#filter.gpu.size()} = 0  OR  p.product_gpu IN (:#{#filter.gpu}) )" +
-                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" )
+                    " AND ( :#{#filter.screenSize.size()} = 0  OR  p.product_screen_size IN (:#{#filter.screenSize}) )" +
+                    " AND ( :#{#filter.searchTitle.length()} = 0 OR lower(p.product_title) like concat('%',:#{#filter.searchTitle.toLowerCase()},'%'))" )
     public Long countProductsByFilter(FilterRequestDto filter);
 
     public Product getByProductCode(String productCode);

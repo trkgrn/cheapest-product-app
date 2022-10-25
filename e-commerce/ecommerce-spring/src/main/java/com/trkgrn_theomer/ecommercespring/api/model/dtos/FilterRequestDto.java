@@ -15,4 +15,5 @@ public class FilterRequestDto {
     private List<String> screenSize;
     private List<String> color;
     private SortDto orderBy;
+    private String searchTitle;
 }

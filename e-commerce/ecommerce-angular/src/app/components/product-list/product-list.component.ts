@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   sortField: any;
   first = 0;
   filterElements:FilterElements = {brandNames:[],operatingSystems:[],gpus:[],cpus:[],hdds:[],colors:[],screenSizes:[],rams:[]};
-  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[],orderBy:{}};
+  selectedFilters:SelectedFilter= {brandName:[],operatingSystem:[],gpu:[],cpu:[],hdd:[],color:[],screenSize:[],ram:[],orderBy:{},searchTitle:''};
 
   constructor(private productService: ProductService,private primengConfig: PrimeNGConfig,
               private route: ActivatedRoute) { }

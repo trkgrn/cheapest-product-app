@@ -112,8 +112,7 @@
                         placeholder="Sıralama" (onChange)="filterChange()" styleClass="mb-2 md:mb-0"></p-dropdown>
             <span class="p-input-icon-left mb-2 md:mb-0">
                               <i class="pi pi-search"></i>
-                              <input type="search" pInputText placeholder="Search by Name"
-                                     (input)="dv.filter($any($event.target).value)">
+                              <input type="search" pInputText placeholder="Başlığa göre ara" [(ngModel)]="selectedFilters.searchTitle" (change)="filterChange()" >
                           </span>
           </div>
         </ng-template>

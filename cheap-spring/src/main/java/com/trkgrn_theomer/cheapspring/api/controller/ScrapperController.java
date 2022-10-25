@@ -56,6 +56,7 @@ public class ScrapperController {
     @GetMapping("/scrape/n11")
     public List<ProductWithStore> N11Scrape(){
         List<ProductWithStore> products = this.n11ScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(1L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -66,6 +67,7 @@ public class ScrapperController {
     @GetMapping("/scrape/teknosa")
     public List<ProductWithStore> TeknosaScrape(){
         List<ProductWithStore> products = this.teknosaScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(3L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -76,6 +78,7 @@ public class ScrapperController {
     @GetMapping("/scrape/pazarama")
     public List<ProductWithStore> PazaramaScrape(){
         List<ProductWithStore> products = this.pazaramaScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(5L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -86,6 +89,7 @@ public class ScrapperController {
     @GetMapping("/scrape/teknolojipazar")
     public List<ProductWithStore> TeknolojiPazarScrape(){
         List<ProductWithStore> products = this.teknolojiPazarScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(10L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -96,6 +100,7 @@ public class ScrapperController {
     @GetMapping("/scrape/pttavm")
     public List<ProductWithStore> PTTAvmScrape(){
         List<ProductWithStore> products = this.pttAvmScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(6L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -105,6 +110,7 @@ public class ScrapperController {
     @GetMapping("/scrape/incehesap")
     public List<ProductWithStore> InceHesapScrape(){
         List<ProductWithStore> products = this.inceHesapScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(7L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -115,6 +121,7 @@ public class ScrapperController {
     @GetMapping("/scrape/teknoraks")
     public List<ProductWithStore> TeknoraksScrape(){
         List<ProductWithStore> products = this.teknoraksScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(8L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -125,6 +132,7 @@ public class ScrapperController {
     @GetMapping("/scrape/vatan")
     public List<ProductWithStore> VatanScrape(){
         List<ProductWithStore> products = this.vatanScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(2L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -135,6 +143,7 @@ public class ScrapperController {
     @GetMapping("/scrape/ciceksepeti")
     public List<ProductWithStore> CicekSepetiScrape(){
         List<ProductWithStore> products = this.cicekSepetiScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(9L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -145,6 +154,7 @@ public class ScrapperController {
     @GetMapping("/scrape/trendyol")
     public List<ProductWithStore> TrendyolScrape(){
         List<ProductWithStore> products = this.trendyolScrapperService.scrape();
+        this.productWithStoreService.deleteByStoreId(4L);
         products = this.productWithStoreService.distinctList(products);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
@@ -156,6 +166,7 @@ public class ScrapperController {
     public List<ProductWithStore> EcommerceScrape(){
         List<ProductWithStore> products = this.ecommerceScrapperService.scrape();
         products = this.productWithStoreService.distinctList(products);
+        this.productWithStoreService.deleteByStoreId(11L);
         products.stream().forEach(p->{
             productWithStoreService.save(p);
         });

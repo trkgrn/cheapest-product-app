@@ -8,4 +8,5 @@ export class SelectedFilter {
   color: any;
   ram:any;
   orderBy:any;
+  searchTitle:any;
 }

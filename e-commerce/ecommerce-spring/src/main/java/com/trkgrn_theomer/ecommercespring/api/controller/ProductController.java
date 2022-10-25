@@ -53,7 +53,10 @@ public class ProductController {
 
     @GetMapping("/scrape")
     public ResponseEntity<List<Product>> dataSetCreate() throws IOException {
-        List<Product> addedProducts = this.productService.saveAll(this.productScrapper.scrape());
+        List<Product> addedProducts = this.productScrapper.scrape();
+        addedProducts.stream().forEach(product -> {
+            this.productService.save(product);
+        });
 
         return ResponseEntity.ok(addedProducts);
     }

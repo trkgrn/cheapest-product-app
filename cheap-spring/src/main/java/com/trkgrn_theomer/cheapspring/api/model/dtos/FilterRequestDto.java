@@ -14,4 +14,5 @@ public class FilterRequestDto {
     private List<String> operatingSystem;
     private List<String> screenSize;
     private List<String> color;
+    private String searchTitle;
 }
