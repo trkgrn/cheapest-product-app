@@ -8,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,8 +35,10 @@ public class EcommerceScrapperService {
         this.driver = driver;
         this.productService = productService;
         driver.manage().window().maximize();
-        driver.manage().timeouts().scriptTimeout(Duration.ofMinutes(5));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofMinutes(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
     }
 
 
@@ -59,6 +63,9 @@ public class EcommerceScrapperService {
     public List<ProductWithStore> getProductWithStoreByPage(int page,List<String> productCodes) throws IOException {
         List<ProductWithStore> products = new ArrayList<>();
         driver.get(baseUrl+pageExtension+page);
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+
         Document doc = Jsoup.parse(driver.getPageSource());
         Elements body = doc.select("div.p-dataview-content > div.p-grid");
         for (Element e:body.select("div.flex")) {

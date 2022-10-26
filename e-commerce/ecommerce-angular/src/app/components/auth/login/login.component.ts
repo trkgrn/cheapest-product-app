@@ -23,12 +23,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
   }
 
  async login()
   {
     let resp:any = await this.authService.login(this.form.value).toPromise()
-      .then(r=>this.router.navigate(["/products"]))
+      .then(r=>{
+        if(this.authService.getRole() == 'ADMIN')
+          this.router.navigate(["/product/manage"])
+        else
+          this.router.navigate(["/products"])
+      })
       .catch((err:any)=>{
         this.messageService.add({severity: 'error', summary: 'Giriş Başarısız',
           detail: 'Hatalı giriş. Lütfen bilgilerini kontrol edip tekrar deneyin.'});
