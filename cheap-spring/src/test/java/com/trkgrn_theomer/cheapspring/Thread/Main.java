@@ -10,7 +10,10 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
-        List<Product> products = IntStream.range(1, 3).parallel().mapToObj(count -> {
+
+
+       long start =  System.currentTimeMillis();
+        List<Product> products = IntStream.range(1, 10000).parallel().mapToObj(count -> {
             try {
                 System.out.println(count);
                 return new ArrayList<Product>();
@@ -19,10 +22,14 @@ public class Main {
             }
 
         }).flatMap(List::stream).collect(Collectors.toList());
+        long end =  System.currentTimeMillis();
 
+        System.out.println("Time: "+(end-start));
+
+//        test();
     }
 
-    void test(){
+   static void test(){
         System.out.println("Main thread is starting");
 
         MyThread myThread = new MyThread("child1");
